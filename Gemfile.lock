@@ -311,7 +311,7 @@ DEPENDENCIES
   rspec-rails (~> 5.1)
   sass-rails (>= 6)
   selenium-webdriver
-  shoulda-matchers (~> 5.0)
+  shoulda-matchers
   simplecov (~> 0.21.2)
   slim-rails (~> 3.3)
   sprockets-rails (>= 2.3.2)

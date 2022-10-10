@@ -57,7 +57,7 @@ group :test do
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
-  gem 'shoulda-matchers', '~> 5.0'
+  gem 'shoulda-matchers'
   gem 'simplecov', '~> 0.21.2'
 end
 
