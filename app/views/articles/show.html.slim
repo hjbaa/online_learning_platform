@@ -1,2 +1,10 @@
 h1 =@article.title
-h2 =@article.body
+
+p =@article.body
+
+div.btn-group-md.mb-4 role="group"
+  =link_to 'Edit article', edit_article_path(@article), class: 'btn btn-outline-secondary'
+  =link_to 'Delete article', article_path(@article), class: 'btn btn-outline-danger',
+          data: { method: :delete, confirm: 'Are you sure?'}
+
+= link_to 'Back', root_path, class: 'btn btn-outline-primary btn-md mb-4'
