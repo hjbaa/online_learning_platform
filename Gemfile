@@ -31,6 +31,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap', '~> 5.2.1'
 gem 'sprockets-rails', '>= 2.3.2'
 gem 'cocoon'
+gem 'popper_js', '~> 2.11.5'
 gem 'devise'
 gem 'jquery-rails'
 gem 'slim-rails', '~> 3.3'
@@ -41,6 +42,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.2'
   gem 'rspec-rails', '~> 5.1'
+  gem 'rubocop'
 end
 
 group :development do
@@ -57,7 +59,7 @@ group :test do
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
-  gem 'shoulda-matchers', '~> 5.0'
+  gem 'shoulda-matchers'
   gem 'simplecov', '~> 0.21.2'
 end
 
