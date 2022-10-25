@@ -9,3 +9,9 @@
     =f.label :body, 'Enter text'
   .col-sm-10.col-form-label
     =f.text_area :body, class: 'form-control'
+
+.mb-3.row
+  .col-sm-2.col-form-label
+    =f.label :type, 'Public Article'
+  .col-sm-10.col-form-label
+    =f.check_box :type, {class: 'form-check-input'}, 'Public', 'Hidden'

@@ -9,10 +9,9 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    header class="p-3 bg-dark text-white"
-      =render 'shared/header'
+    header class="p-3 bg-primary text-white"
+      =render 'shared/teacher_header'
 
     main class ="container mt-3"
       =render 'shared/flash'
-
       = yield
