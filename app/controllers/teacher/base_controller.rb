@@ -1,15 +1,19 @@
-class Teacher::BaseController <ApplicationController
-  layout 'teacher'
+# frozen_string_literal: true
 
-  before_action :authenticate_user!
-  before_action :teacher_required!
+module Teacher
+  class BaseController < ApplicationController
+    layout 'teacher'
 
-  private
+    before_action :authenticate_user!
+    before_action :teacher_required!
 
-  def teacher_required!
-    return if current_user.is_a?(Teacher)
+    private
 
-    flash[:danger] = 'You are not required to view this page!'
-    redirect_to root_path
+    def teacher_required!
+      return if current_user.is_a?(Teacher)
+
+      flash[:danger] = 'You are not required to view this page!'
+      redirect_to root_path
+    end
   end
 end
