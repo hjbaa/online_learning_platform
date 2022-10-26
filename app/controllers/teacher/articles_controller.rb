@@ -1,55 +1,52 @@
 # frozen_string_literal: true
+class Teacher::ArticlesController < Teacher::BaseController
+  before_action :find_article, only: %i[show edit update destroy start update_inline]
 
-module Teacher
-  class ArticlesController < Teacher::BaseController
-    before_action :find_article, only: %i[show edit update destroy start update_inline]
+  def index
+    @articles = Article.all
+  end
 
-    def index
-      @articles = Article.all
+  def new
+    @article = current_user.created_articles.new
+  end
+
+  def create
+    @article = current_user.created_articles.new(article_params)
+
+    if @article.save
+      flash[:success] = 'Your Article successfully created.'
+      redirect_to @article
+    else
+      render :new, status: :unprocessable_entity
     end
+  end
 
-    def new
-      @article = current_user.created_articles.new
+  def update
+    if @article.update(article_params)
+      flash[:success] = 'Article was updated!'
+      redirect_to @article
+    else
+      render :edit, status: :unprocessable_entity
     end
+  end
 
-    def create
-      @article = current_user.created_articles.new(article_params)
+  def destroy
+    @article.destroy
+    flash[:success] = 'Test was destroyed!'
+    redirect_to root_path
+  end
 
-      if @article.save
-        flash[:success] = 'Your Article successfully created.'
-        redirect_to @article
-      else
-        render :new, status: :unprocessable_entity
-      end
-    end
+  def show; end
 
-    def update
-      if @article.update(article_params)
-        flash[:success] = 'Article was updated!'
-        redirect_to @article
-      else
-        render :edit, status: :unprocessable_entity
-      end
-    end
+  def edit; end
 
-    def destroy
-      @article.destroy
-      flash[:success] = 'Test was destroyed!'
-      redirect_to root_path
-    end
+  private
 
-    def show; end
+  def article_params
+    params.require(:article).permit(:title, :body, :type)
+  end
 
-    def edit; end
-
-    private
-
-    def article_params
-      params.require(:article).permit(:title, :body, :type)
-    end
-
-    def find_article
-      @article = Article.find(params[:id])
-    end
+  def find_article
+    @article = Article.find(params[:id])
   end
 end
