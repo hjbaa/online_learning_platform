@@ -8,4 +8,5 @@ class Article < ApplicationRecord
   scope :are_public, -> { where(type: 'Public') }
 
   self.inheritance_column = :_type_disabled
+  has_rich_text :body
 end

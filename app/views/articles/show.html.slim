@@ -1,5 +1,6 @@
 h1 =@article.title
 
-p =@article.body
+.mb-4
+  =sanitize @article.body.to_s
 
 = link_to 'Back', root_path, class: 'btn btn-outline-primary btn-md mb-4'

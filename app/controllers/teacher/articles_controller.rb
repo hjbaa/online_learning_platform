@@ -15,7 +15,7 @@ class Teacher::ArticlesController < Teacher::BaseController
 
     if @article.save
       flash[:success] = 'Your Article successfully created.'
-      redirect_to @article
+      redirect_to teacher_article_path(@article)
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,7 +24,7 @@ class Teacher::ArticlesController < Teacher::BaseController
   def update
     if @article.update(article_params)
       flash[:success] = 'Article was updated!'
-      redirect_to @article
+      redirect_to teacher_article_path(@article)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class Teacher::ArticlesController < Teacher::BaseController
   def destroy
     @article.destroy
     flash[:success] = 'Test was destroyed!'
-    redirect_to root_path
+    redirect_to teacher_articles_path
   end
 
   def show; end

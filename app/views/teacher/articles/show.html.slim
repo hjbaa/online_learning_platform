@@ -1,6 +1,8 @@
 h1 =@article.title
 
-p =@article.body
+.mb-4
+  =sanitize @article.body.to_s
+
 
 div.btn-group-md.mb-4 role="group"
   =link_to 'Edit article', edit_teacher_article_path(@article), class: 'btn btn-outline-secondary'

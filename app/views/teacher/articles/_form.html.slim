@@ -1,3 +1,5 @@
+=render 'shared/errors', object: @article
+
 =form_with model: [:teacher, @article], local: true do |f|
   =render 'article_fields', f: f
 
