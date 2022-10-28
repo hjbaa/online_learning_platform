@@ -1,0 +1,15 @@
+h2
+  | Sign up
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = render "devise/shared/error_messages", resource: resource
+
+  =render "devise/shared/registrations_fields", f: f
+  .field.custom-control.custom-switch.row.mb-2
+    .col-sm-12.col-form-label
+      =f.select :type, ['Student', 'Teacher'], {:selected => 'Student'}, class: 'form-select'
+
+  .actions.mb-2
+    = f.submit "Sign up", class: 'btn btn-outline-primary'
+
+  = render "devise/shared/links"
+
