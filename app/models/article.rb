@@ -9,4 +9,5 @@ class Article < ApplicationRecord
 
   self.inheritance_column = :_type_disabled
   has_rich_text :body
+  has_many_attached :files
 end
