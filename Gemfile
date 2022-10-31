@@ -29,12 +29,13 @@ gem 'jbuilder', '~> 2.7'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap', '~> 5.2.1'
-gem 'sprockets-rails', '>= 2.3.2'
 gem 'cocoon'
-gem 'popper_js', '~> 2.11.5'
 gem 'devise'
+gem 'image_processing', '~> 1.2'
 gem 'jquery-rails'
+gem 'popper_js', '~> 2.11.5'
 gem 'slim-rails', '~> 3.3'
+gem 'sprockets-rails', '>= 2.3.2'
 
 
 group :development, :test do

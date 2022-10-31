@@ -16,6 +16,8 @@ require("channels")
 
 import '@popperjs/core'
 import 'bootstrap/js/dist/dropdown'
+import "trix"
+import "@rails/actiontext"
 
 window.jQuery = $;
 window.$ = $;
