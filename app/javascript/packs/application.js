@@ -19,6 +19,11 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
+let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+});
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

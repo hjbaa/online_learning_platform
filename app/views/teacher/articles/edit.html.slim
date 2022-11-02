@@ -1,7 +1,6 @@
 .fs-2.mb-2
-  =link_to :back, class: 'mr-2'  do
+  =link_to :back, class: 'mr-2', data_toggle: "tooltip", title: "Back" do
     i class="bi bi-arrow-left"
   | Edit article
-
 
 = render 'form'

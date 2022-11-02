@@ -32,7 +32,7 @@ class Teacher::ArticlesController < Teacher::BaseController
 
   def destroy
     @article.destroy
-    flash[:success] = 'Test was destroyed!'
+    flash[:success] = 'Article was destroyed!'
     redirect_to teacher_articles_path
   end
 

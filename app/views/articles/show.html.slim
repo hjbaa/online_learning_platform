@@ -1,7 +1,9 @@
-.fs-2.mb-2
-  =link_to :back, class: 'mr-2' do
-    i class="bi bi-arrow-left"
-  =@article.title
+.fs-2.mb-4.d-inline-block
+  .d-inline-block.me-2
+    =link_to :back, class: 'icon-back', data_toggle: "tooltip", title: "Back" do
+      i class="bi bi-arrow-left"
+  .p-0.d-inline-block.me-4
+    =@article.title
 
 .mb-4.fs-4
   =sanitize @article.body.to_s
