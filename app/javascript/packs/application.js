@@ -13,6 +13,7 @@ import '@popperjs/core'
 import 'bootstrap/js/dist/dropdown'
 import "trix"
 import "@rails/actiontext"
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 require("turbolinks").start()
 require("@rails/activestorage").start()

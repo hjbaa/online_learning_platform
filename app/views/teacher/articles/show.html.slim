@@ -1,6 +1,9 @@
-h1 =@article.title
+.fs-2.mb-2
+  =link_to :back, class: 'mr-2' do
+    i class="bi bi-arrow-left"
+  =@article.title
 
-.mb-4
+.mb-4.fs-4
   =sanitize @article.body.to_s
 
 
@@ -8,5 +11,3 @@ div.btn-group-md.mb-4 role="group"
   =link_to 'Edit article', edit_teacher_article_path(@article), class: 'btn btn-outline-secondary'
   =link_to 'Delete article', teacher_article_path(@article), class: 'btn btn-outline-danger',
           data: { method: :delete, confirm: 'Are you sure?'}
-
-= link_to 'Back', teacher_articles_path, class: 'btn btn-outline-primary btn-md mb-4'

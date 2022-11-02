@@ -1,4 +1,13 @@
-h2 Edit your account
+/ =link_to 'back', :back
+/ i class="bi bi-arrow-left fs-3"
+/
+/ h2 Edit your account
+
+.fs-3.mb-2
+  =link_to :back, class: 'mr-2'  do
+    i class="bi bi-arrow-left"
+  | Edit your account
+
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = render "devise/shared/error_messages", resource: resource
   .field.mb-2.row
@@ -52,7 +61,6 @@ h2 Edit your account
       = f.password_field :current_password, autocomplete: "current-password", class: 'form-control'
   .actions.mb-2
     = f.submit "Update", class: 'btn btn-outline-success'
-=button_to "Back", :back, class: 'btn btn-outline-primary mb-3', method: :get
 h3
   | Cancel my account
 p

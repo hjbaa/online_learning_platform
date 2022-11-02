@@ -1,6 +1,7 @@
-h1 =@article.title
+.fs-2.mb-2
+  =link_to :back, class: 'mr-2' do
+    i class="bi bi-arrow-left"
+  =@article.title
 
-.mb-4
+.mb-4.fs-4
   =sanitize @article.body.to_s
-
-= link_to 'Back', root_path, class: 'btn btn-outline-primary btn-md mb-4'
