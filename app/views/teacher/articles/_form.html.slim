@@ -3,4 +3,7 @@
 =form_with model: [:teacher, @article], local: true do |f|
   =render 'article_fields', f: f
 
+  =link_to 'Create test for article', '#', id: 'create-test-button', class: 'btn btn-outline-secondary btn-sm mb-4'
+
+  br
   =f.submit 'Submit', class: 'btn btn-outline-primary btn-md mb-4'

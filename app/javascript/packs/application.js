@@ -7,20 +7,16 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-
-require("jquery")
-require("@rails/ujs").start()
-require("turbolinks").start()
-require("@rails/activestorage").start()
-require("channels")
+import "./tests/test_creation"
 
 import '@popperjs/core'
 import 'bootstrap/js/dist/dropdown'
 import "trix"
 import "@rails/actiontext"
 
-window.jQuery = $;
-window.$ = $;
+require("turbolinks").start()
+require("@rails/activestorage").start()
+require("channels")
 
 Rails.start()
 Turbolinks.start()
