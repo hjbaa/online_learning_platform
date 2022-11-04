@@ -6,5 +6,6 @@ Rails.application.routes.draw do
 
   namespace :teacher do
     resources :articles
+    resources :tests, only: %i[create]
   end
 end

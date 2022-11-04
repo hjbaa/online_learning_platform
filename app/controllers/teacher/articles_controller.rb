@@ -8,7 +8,6 @@ class Teacher::ArticlesController < Teacher::BaseController
 
   def new
     @article = current_user.created_articles.new
-    @test = Test.new(author: current_user, article: @article)
   end
 
   def create
@@ -37,7 +36,13 @@ class Teacher::ArticlesController < Teacher::BaseController
     redirect_to teacher_articles_path
   end
 
-  def show; end
+  def show
+    @test = if @article.test.present?
+              @article.test
+            else
+              Test.new(author: current_user, article: @article)
+            end
+  end
 
   def edit; end
 

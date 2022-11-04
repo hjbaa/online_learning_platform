@@ -12,5 +12,15 @@
             data_toggle: "tooltip", title: "Delete" do
       i class="bi bi-trash"
 
-.mb-4.fs-4
+.mb-5.fs-4
   =sanitize @article.body.to_s
+
+
+.mb-3
+  -if @test.new_record?
+    =link_to 'Create test for article', '#', id: 'create-test-button', class: 'btn btn-outline-secondary btn-sm mb-4'
+    #test-form.hidden
+      =render 'teacher/tests/hidden_form'
+
+  -else
+    =render @test

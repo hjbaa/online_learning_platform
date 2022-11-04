@@ -1,7 +1,11 @@
 document.addEventListener('turbolinks:load', () => {
-    if (document.getElementById('create-test-button')) {
-        document.getElementById('create-test-button').addEventListener('click', () => {
-            alert('molodec')
+    let createTestButton = document.getElementById('create-test-button')
+    if (createTestButton) {
+        createTestButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            let form = document.getElementById('test-form');
+            form.classList.remove('hidden');
+            createTestButton.remove();
         })
     }
 });
