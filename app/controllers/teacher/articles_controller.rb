@@ -8,6 +8,7 @@ class Teacher::ArticlesController < Teacher::BaseController
 
   def new
     @article = current_user.created_articles.new
+    @test = Test.new(author: current_user, article: @article)
   end
 
   def create

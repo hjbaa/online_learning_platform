@@ -14,6 +14,7 @@ class Article < ApplicationRecord
   scope :are_public, -> { where(type: 'Public') }
 
   self.inheritance_column = :_type_disabled
+  accepts_nested_attributes_for :test, reject_if: :all_blank
 
   private
 
