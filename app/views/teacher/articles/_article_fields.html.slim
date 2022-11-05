@@ -1,8 +1,13 @@
 .field.mb-3.row
-  .col-sm-1.col-form-label
-    =f.label :title, 'Title', class: ''
-  .col-sm-11.col-form-label
+  .col-sm-2.col-form-label.fs-4
+    =f.label :title, 'Title'
+  .col-sm-10.col-form-label
     =f.text_field :title, placeholder: 'Title', class: 'form-control'
+
+  .col-sm-2.col-form-label.fs-4
+    = f.label :description, 'Description'
+  .col-sm-10.col-form-label
+    = f.text_field :description, placeholder: 'Description', class: 'form-control'
 
 .field.mb-3
   =f.label :body, 'Enter text', class: 'col-form-label'

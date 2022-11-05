@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2022_10_28_170652) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "author_id"
     t.string "type", default: "Public", null: false
+    t.string "description"
     t.index ["author_id"], name: "index_articles_on_author_id"
   end
 

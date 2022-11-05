@@ -49,7 +49,7 @@ class Teacher::ArticlesController < Teacher::BaseController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :type, files: [])
+    params.require(:article).permit(:title, :body, :type, :description, files: [])
   end
 
   def find_article

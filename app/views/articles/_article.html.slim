@@ -1,9 +1,10 @@
 .card.mb-4
   h5.card-header Recent
   .card-body
-    h5.card-title =article.title
+    h5.card-title
+      =article.title
     p.card-subtitle
-      | Description here
+      =article.description
     small.card-text.text-muted
       ="By #{article.author.name} #{article.author.last_name}"
   .card-footer
