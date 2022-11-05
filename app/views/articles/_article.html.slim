@@ -1,5 +1,10 @@
-div class="card text-black bg-light m-1 mb-4 d-inline-block" style="max-width: 20rem;"
-  div class="card-body"
-    h3 class="card-title" =article.title
-  div class="card-footer text-center"
-    =link_to 'Show', article_path(article), class: 'btn btn-outline-primary'
+.card.mb-4
+  h5.card-header Recent
+  .card-body
+    h5.card-title =article.title
+    p.card-subtitle
+      | Description here
+    small.card-text.text-muted
+      ="By #{article.author.name} #{article.author.last_name}"
+  .card-footer
+    =link_to 'Read', teacher_article_path(article), class: 'btn btn-secondary'

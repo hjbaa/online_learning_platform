@@ -9,9 +9,11 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    header class="p-3 bg-primary text-white"
-      =render 'shared/teacher_header'
+    div data-behavior="vue"
+      header class="p-3 text-white teacher-header"
+        =render 'shared/teacher_header'
 
-    main class ="container mt-3"
-      =render 'shared/flash'
-      = yield
+      main class ="container mt-3"
+        =render 'shared/flash'
+
+        = yield
