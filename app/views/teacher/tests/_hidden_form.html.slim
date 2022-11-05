@@ -1,6 +1,16 @@
 =render 'shared/errors', object: @test
 
-=form_with model: [:teacher, @test], local: false do |f|
+=form_with model: [:teacher, @test], local: true do |f|
   =f.number_field :author_id, class: 'hidden'
   =f.number_field :article_id, class: 'hidden'
-  =f.submit 'Create test for article', class: 'btn btn-outline-primary btn-lg mb-4'
+
+  .mb-3.add-questions
+    p
+      | Add questions:
+    .mb-3
+      =f.fields_for :questions do |q|
+        =render 'teacher/questions/question_fields', f: q
+      =link_to_add_association 'Add one more question', f, :questions, partial: 'teacher/questions/question_fields'
+
+
+  =f.submit 'Submit', class: 'btn btn-outline-success btn-lg mb-4'

@@ -37,11 +37,12 @@ class Teacher::ArticlesController < Teacher::BaseController
   end
 
   def show
-    @test = if @article.test.present?
-              @article.test
-            else
-              Test.new(author: current_user, article: @article)
-            end
+    if @article.test.present?
+      @test = @article.test
+    else
+      @test = Test.new(author: current_user, article: @article)
+      @question = @test.questions.new
+    end
   end
 
   def edit; end
