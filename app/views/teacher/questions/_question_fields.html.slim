@@ -1,5 +1,19 @@
-.mb-3.row
-  .col-sm-2.col-form-label
-    =f.label :title, "Question's title"
-  .col-sm-10.col-form-label
-    =f.text_field :title, class: 'form-control'
+.nested-fields.question-form
+  .remove-link.fs-3.flex-row-reverse
+    = link_to_remove_association f, class: 'icon-delete'
+      i class="bi bi-trash"
+  .mb-3
+    .col-form-label
+      =f.label :title, "Question's title"
+    .col-form-label.row
+      .col-sm-12
+        =f.text_field :title, class: 'form-control'
+
+  .add-answers
+    hr
+      .mb-3
+        =f.fields_for :answers do |a|
+      / =render 'teacher/answers/answer_fields', :f => a
+
+    .add-answer-link
+      =link_to_add_association "Add answer", f, :answers, partial: 'teacher/answers/answer_fields', class: 'btn btn-outline-success'

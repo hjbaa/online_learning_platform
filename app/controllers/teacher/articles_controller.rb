@@ -41,7 +41,8 @@ class Teacher::ArticlesController < Teacher::BaseController
       @test = @article.test
     else
       @test = Test.new(author: current_user, article: @article)
-      @question = @test.questions.new
+      @questions = @test.questions.build
+      @answers = @questions.answers.build
     end
   end
 

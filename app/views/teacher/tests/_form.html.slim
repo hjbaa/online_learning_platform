@@ -1,0 +1,16 @@
+=render 'shared/errors', object: @test
+
+=form_for [:teacher, @test], local: true do |f|
+  = f.number_field :author_id, class: 'hidden'
+  = f.number_field :article_id, class: 'hidden'
+
+  .add-questions
+    =f.fields_for :questions do |q|
+      =render 'teacher/questions/question_fields', :f => q
+
+    .add-question-link.mb-5.fs-3
+      =link_to_add_association f, :questions, partial: 'teacher/questions/question_fields', class: 'icon-new', data_toggle: "tooltip", title: "New Question" do
+        i class="bi bi-plus-square"
+
+
+  =f.submit 'Create test', class: 'btn btn-success btn-lg mb-4'

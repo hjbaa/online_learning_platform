@@ -1,3 +1,11 @@
 // Place all the styles related to the teacher::Tests controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.question-form {
+  border: 2px solid lightgrey;
+  border-radius: 5px;
+  padding: 15pt;
+  margin-bottom: 15pt;
+  margin-top: 15pt;
+}

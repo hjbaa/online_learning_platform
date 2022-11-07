@@ -11,10 +11,10 @@ import "./tests/test_creation"
 
 import '@popperjs/core'
 import 'bootstrap/js/dist/dropdown'
+import "@oddcamp/cocoon-vanilla-js";
 import "trix"
 import "@rails/actiontext"
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import "@oddcamp/cocoon-vanilla-js";
 
 require("turbolinks").start()
 require("@rails/activestorage").start()

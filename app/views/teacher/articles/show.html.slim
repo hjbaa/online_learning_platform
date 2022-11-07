@@ -20,7 +20,7 @@
   -if @test.new_record?
     =link_to 'Create test for article', '#', id: 'create-test-button', class: 'btn btn-outline-secondary btn-sm mb-4'
     #test-form
-      =render 'teacher/tests/hidden_form'
+      =render 'teacher/tests/form'
 
   -else
     p Hello wrold! Test is here
