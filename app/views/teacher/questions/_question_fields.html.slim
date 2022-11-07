@@ -1,13 +1,13 @@
 .nested-fields.question-form
-  .remove-link.fs-3.flex-row-reverse
-    = link_to_remove_association f, class: 'icon-delete'
-      i class="bi bi-trash"
-  .mb-3
-    .col-form-label
-      =f.label :title, "Question's title"
-    .col-form-label.row
-      .col-sm-12
-        =f.text_field :title, class: 'form-control'
+  .row
+    .col-sm-1
+      .remove-link.fs-3.flex-row-reverse
+        = link_to_remove_association f, class: 'icon-delete'
+          i class="bi bi-trash"
+    .col-sm-2.fs-4
+      span Question #
+    .col-sm-9
+      =f.text_field :title, class: 'form-control', placeholder: 'Enter question'
 
   .add-answers
     hr

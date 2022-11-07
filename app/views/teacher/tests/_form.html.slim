@@ -6,7 +6,7 @@
 
   .add-questions
     =f.fields_for :questions do |q|
-      =render 'teacher/questions/question_fields', :f => q
+      =render 'teacher/questions/question_fields', f: q
 
     .add-question-link.mb-5.fs-3
       =link_to_add_association f, :questions, partial: 'teacher/questions/question_fields', class: 'icon-new', data_toggle: "tooltip", title: "New Question" do

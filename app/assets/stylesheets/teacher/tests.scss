@@ -9,3 +9,12 @@
   margin-bottom: 15pt;
   margin-top: 15pt;
 }
+
+#test-form {
+  counter-reset: question;
+}
+
+.question-form span::after {
+  counter-increment: question;
+  content: counter(question)
+}

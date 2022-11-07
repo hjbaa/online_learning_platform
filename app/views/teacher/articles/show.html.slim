@@ -18,8 +18,8 @@
 
 .mb-3
   -if @test.new_record?
-    =link_to 'Create test for article', '#', id: 'create-test-button', class: 'btn btn-outline-secondary btn-sm mb-4'
-    #test-form
+    =link_to 'Create test for article', '#', id: 'create-test-button', class: 'btn btn-outline-secondary btn-md'
+    #test-form.hidden
       =render 'teacher/tests/form'
 
   -else
