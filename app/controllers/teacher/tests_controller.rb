@@ -2,12 +2,9 @@ class Teacher::TestsController < Teacher::BaseController
   def create
     @test = Test.new(test_params)
 
-    if @test.save
-      flash[:success] = 'Your test was created!'
-      redirect_to teacher_article_path(@test.article)
-    else
-      render teacher_article_path(@test.article)
-    end
+    flash[:success] = 'Your test was created!' if @test.save
+
+    redirect_to teacher_article_path(@test.article)
   end
 
   private
