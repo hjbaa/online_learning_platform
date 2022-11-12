@@ -8,4 +8,6 @@ Rails.application.routes.draw do
     resources :articles
     resources :tests, only: %i[create]
   end
+
+  get '/tests/:id', to: 'tests#test_passing', as: 'test_passing'
 end
