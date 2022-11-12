@@ -1,0 +1,8 @@
+.fs-4
+  - if test.title
+    ul
+      li.item
+        | Test "#{test.title}"
+      = render partial: 'teacher/questions/question', collection: test.questions
+  -else
+    = render partial: 'teacher/questions/question', collection: test.questions

@@ -7,4 +7,9 @@ class Test < ApplicationRecord
   has_many :questions, dependent: :destroy
 
   accepts_nested_attributes_for :questions, reject_if: :all_blank
+  #
+  # def make_json
+  #   Test.all.to_json(only: :title,
+  #                    include: { questions: { only: :title, include: { answers: { only: %i[content correct] } } } })
+  # end
 end
