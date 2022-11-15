@@ -40,6 +40,7 @@ class Teacher::ArticlesController < Teacher::BaseController
     if @article.test.present?
       @test = @article.test
     else
+      # TODO: переписать по-человечески
       @test = Test.new(author: current_user, article: @article)
       @questions = @test.questions.build
       @answers = @questions.answers.build

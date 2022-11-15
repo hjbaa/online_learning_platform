@@ -19,8 +19,11 @@
 .created-test
   -if @test.new_record?
     =link_to 'Create test for article', '#', id: 'create-test-button', class: 'btn btn-outline-secondary btn-md'
+    #new-test-errors
+      = render 'shared/errors', object: @test
+
     #test-form.hidden
-      =render 'teacher/tests/form'
+      =render 'teacher/tests/form', article: @article, test: @test
 
   -else
     =render @test

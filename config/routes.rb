@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :teacher do
     resources :articles
-    resources :tests, only: %i[create]
+    resources :tests, only: %i[create destroy]
   end
 
   get '/tests/:id', to: 'tests#test_passing', as: 'test_passing'

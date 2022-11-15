@@ -1,9 +1,16 @@
 class Teacher::TestsController < Teacher::BaseController
   def create
-    @test = Test.new(test_params)
+    @test = Test.create(test_params)
 
-    flash[:success] = 'Your test was created!' if @test.save
+    # redirect_to @test.article
+    # flash[:success] = 'Your test was created!' if @test.save
 
+    # redirect_to teacher_article_path(@test.article)
+  end
+
+  def destroy
+    @test = Test.find(params[:id])
+    @test.destroy
     redirect_to teacher_article_path(@test.article)
   end
 

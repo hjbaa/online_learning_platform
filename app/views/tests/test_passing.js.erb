@@ -1,1 +1,21 @@
-document.getElementById('test-passage').innerHTML += 'hello world'
+const quizObj = JSON.parse('<%=raw @test_json %>');
+let currentQuestion = 0;
+let score = 0;
+
+function clearTestArea() {
+    let parentNode = document.getElementById('test-passage')
+    while (parentNode.firstChild) {
+        parentNode.removeChild(parentNode.firstChild);
+    }
+}
+
+function createAnswersButtons(answers) {
+    const emptyButton = document.createElement('button')
+    emptyButton.classList.add('btn btn-secondary')
+
+}
+
+function createQuiz(quizObj, currentQuestion) {
+    const question = quizObj.questions[currentQuestion]
+
+}
