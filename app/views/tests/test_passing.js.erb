@@ -1,29 +1,39 @@
-const quizObj = JSON.parse('<%=raw @test_json %>');
-let currentQuestion = 0;
-let score = 0;
-let selected = [];
+let quizObj = JSON.parse('<%=raw @test_json %>');
+quizObj.currentQuestion = 0;
+quizObj.score = 0;
+quizObj.selected = [];
 
-clearTestArea();
-createQuizArea(quizObj.questions[0])
+function findMaxCorrect(quizObj) {
+    let count = 0;
+    quizObj.questions.forEach(questElement => {
+        questElement.answers.forEach(ansElement => {
+            if (ansElement.correct) {
+                count++;
+            }
+        })
+    })
 
-function clearTestArea() {
+    return count;
+}
+
+quizObj.clearTestArea = function () {
     let parentNode = document.getElementById('test-passage')
     while (parentNode.firstChild) {
         parentNode.removeChild(parentNode.firstChild);
     }
 }
 
-function createQuizArea(question) {
+quizObj.createQuizArea = function () {
+    const question = quizObj.questions[quizObj.currentQuestion]
+
     const parentNode = document.getElementById('test-passage')
 
     // Adding question's title
     const textArea = document.createElement('div');
     textArea.className += 'mb-3 fs-3';
     const titleTag = document.createElement('p');
-    titleTag.innerText = question.title;
+    titleTag.innerText = 'Question #' + (quizObj.currentQuestion + 1) + ':\t' + question.title;
     textArea.appendChild(titleTag);
-
-    parentNode.appendChild(textArea)
 
     const buttonArea = document.createElement('div');
     buttonArea.className += 'px-3 fs-4';
@@ -34,6 +44,8 @@ function createQuizArea(question) {
     emptyButton.className += 'btn btn-outline-secondary mb-2 w-25'
     emptyButton.setAttribute('href', 'javascript:;')
     let counter = 0;
+
+    // Adding one button to one answer to document.
     question.answers.forEach((element) => {
         let buttonListElement = document.createElement('li');
         buttonListElement.className += 'list-without-dots'
@@ -48,11 +60,11 @@ function createQuizArea(question) {
 
             if (this.className.includes('btn-outline-secondary')){
                 this.className = this.className.replace('btn-outline-secondary', 'btn-primary');
-                selected.push(Number(this.dataset.number));
+                quizObj.selected.push(Number(this.dataset.number));
             } else {
                 this.className = this.className.replace('btn-primary', 'btn-outline-secondary');
                 let value = Number(this.dataset.number)
-                selected = selected.filter(function(item) {
+                quizObj.selected = quizObj.selected.filter(function(item) {
                     return item !== value
                 })
             }
@@ -63,10 +75,72 @@ function createQuizArea(question) {
         buttonArea.appendChild(buttonListElement)
     })
 
-    parentNode.appendChild(buttonArea)
+    let nextQuestionArea = document.createElement('div');
+    nextQuestionArea.className += 'py-3';
+
+    let nextQuestionButton = emptyButton.cloneNode(false);
+    nextQuestionButton.className = 'btn btn-success mb-2';
+
+    if (quizObj.isEnded()) {
+        nextQuestionButton.innerText = 'End test';
+    } else {
+        nextQuestionButton.innerText = 'Next question';
+    }
+
+    nextQuestionButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        quizObj.selected.forEach(selectedAnswer => {
+            if (quizObj.questions[quizObj.currentQuestion].answers[selectedAnswer]) {
+                quizObj.score++;
+            }
+        })
+
+        if (quizObj.isEnded()) {
+            quizObj.endQuiz();
+        } else {
+            quizObj.nextQuestion();
+        }
+    })
+
+    nextQuestionArea.appendChild(nextQuestionButton)
+
+    parentNode.appendChild(textArea);
+    parentNode.appendChild(buttonArea);
+    parentNode.appendChild(nextQuestionArea);
 }
 
-function createQuiz(quizObj, currentQuestion) {
-    const question = quizObj.questions[currentQuestion]
+quizObj.nextQuestion = function () {
+    quizObj.currentQuestion++;
+    quizObj.selected = [];
 
+    quizObj.clearTestArea();
+    quizObj.createQuizArea();
 }
+
+quizObj.isEnded = function () {
+    return quizObj.currentQuestion + 1 === quizObj.questions.length
+}
+
+quizObj.createQuiz = function () {
+    quizObj.clearTestArea();
+    quizObj.createQuizArea();
+}
+
+quizObj.endQuiz = function () {
+    quizObj.clearTestArea();
+
+    // TODO: пофиксить подсчёт результата
+    // TODO: добавить коллекцию для результатов
+    let resultPercent = quizObj.score / findMaxCorrect(quizObj) * 100;
+    let resultArea = document.createElement('div');
+    resultArea.className = 'fs-3 py-2';
+
+    let resultLine = document.createElement('p')
+    resultLine.innerText = 'Your result: ' + resultPercent + '%';
+
+    resultArea.appendChild(resultLine);
+
+    document.getElementById('test-passage').appendChild(resultArea);
+}
+
+quizObj.createQuiz();
