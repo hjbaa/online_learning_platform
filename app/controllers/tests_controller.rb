@@ -6,10 +6,6 @@ class TestsController < ApplicationController
     @test_json = @test.to_json(only: :title,
                                include: { questions: { only: :title,
                                                        include: { answers: { only: %i[content correct] } } } })
-
-    respond_to do |format|
-      format.js
-    end
   end
 
   private

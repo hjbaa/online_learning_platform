@@ -1,6 +1,10 @@
 const quizObj = JSON.parse('<%=raw @test_json %>');
 let currentQuestion = 0;
 let score = 0;
+let selected = [];
+
+clearTestArea();
+createQuizArea(quizObj.questions[0])
 
 function clearTestArea() {
     let parentNode = document.getElementById('test-passage')
@@ -9,10 +13,57 @@ function clearTestArea() {
     }
 }
 
-function createAnswersButtons(answers) {
-    const emptyButton = document.createElement('button')
-    emptyButton.classList.add('btn btn-secondary')
+function createQuizArea(question) {
+    const parentNode = document.getElementById('test-passage')
 
+    // Adding question's title
+    const textArea = document.createElement('div');
+    textArea.className += 'mb-3 fs-3';
+    const titleTag = document.createElement('p');
+    titleTag.innerText = question.title;
+    textArea.appendChild(titleTag);
+
+    parentNode.appendChild(textArea)
+
+    const buttonArea = document.createElement('div');
+    buttonArea.className += 'px-3 fs-4';
+    const buttonList = document.createElement('ul');
+    buttonArea.appendChild(buttonList);
+
+    const emptyButton = document.createElement('a')
+    emptyButton.className += 'btn btn-outline-secondary mb-2 w-25'
+    emptyButton.setAttribute('href', 'javascript:;')
+    let counter = 0;
+    question.answers.forEach((element) => {
+        let buttonListElement = document.createElement('li');
+        buttonListElement.className += 'list-without-dots'
+
+        let answerButton = emptyButton.cloneNode(false);
+        answerButton.innerText = element.content;
+        answerButton.dataset.number = counter.toString();
+        counter++;
+
+        answerButton.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            if (this.className.includes('btn-outline-secondary')){
+                this.className = this.className.replace('btn-outline-secondary', 'btn-primary');
+                selected.push(Number(this.dataset.number));
+            } else {
+                this.className = this.className.replace('btn-primary', 'btn-outline-secondary');
+                let value = Number(this.dataset.number)
+                selected = selected.filter(function(item) {
+                    return item !== value
+                })
+            }
+        })
+
+        buttonListElement.appendChild(answerButton);
+
+        buttonArea.appendChild(buttonListElement)
+    })
+
+    parentNode.appendChild(buttonArea)
 }
 
 function createQuiz(quizObj, currentQuestion) {
