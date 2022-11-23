@@ -7,8 +7,9 @@
       .input-group
         .input-group-prepend
           .input-group-text.fs-5.rounded-0
-            / -byebug
             =f.check_box :correct, {class: 'form-check-input', data_toggle: "tooltip", title: "Correct answer"}, true, false
-            / = radio_button_tag "test[questions_attributes][#{f.object.question.index}][answers_attributes][correct_choice]", f.index, f.object.correct
-            / = f.radio_button :correct, "#{f.index}", { class: 'form-check-input', data_toggle: "tooltip", title: "Correct answer", name: "test[questions_attributes][0][answers_attributes][correct_choice]" }
         =f.text_field :content, placeholder: 'Content', class: 'form-control'
+  .row.mb-4
+    .col-sm-1
+    .col-sm-11
+      =f.text_area :description, placeholder: 'Describe why this question is correct/incorrect', class: 'form-control'

@@ -2,10 +2,10 @@
   h5.card-header Recent
   .card-body
     h5.card-title
-      =article.title
+      =article& .title
     p.card-subtitle
-      =article.description
+      =article&.description
     small.card-text.text-muted
-      ="By #{article.author.name} #{article.author.last_name}"
+      ="By #{article&.author.name} #{article&.author.last_name}"
   .card-footer
     =link_to 'Read', teacher_article_path(article), class: 'btn btn-secondary'

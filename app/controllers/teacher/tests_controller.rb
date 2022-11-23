@@ -13,6 +13,6 @@ class Teacher::TestsController < Teacher::BaseController
 
   def test_params
     params.require(:test).permit(:title, :author_id, :article_id,
-                                 questions_attributes: [:title, { answers_attributes: %i[content correct] }])
+                                 questions_attributes: [:title, { answers_attributes: %i[content correct description] }])
   end
 end
