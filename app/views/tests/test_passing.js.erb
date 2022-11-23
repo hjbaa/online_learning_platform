@@ -92,7 +92,10 @@ quizObj.checkAnswers = function () {
 
         if (answer.correct) {
             quizObj.score++;
+        } else {
+            quizObj.score--;
         }
+
         index++;
     });
 
