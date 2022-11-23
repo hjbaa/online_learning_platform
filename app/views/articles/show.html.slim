@@ -1,6 +1,14 @@
-h1 =@article.title
+.fs-2.mb-4.d-inline-block
+  .d-inline-block.me-2
+    =link_to :back, class: 'icon-back', data_toggle: "tooltip", title: "Back" do
+      i class="bi bi-arrow-left"
+  .p-0.d-inline-block.me-4
+    =@article.title
 
-.mb-4
+.mb-4.fs-4
   =sanitize @article.body.to_s
 
-= link_to 'Back', root_path, class: 'btn btn-outline-primary btn-md mb-4'
+#test-passage
+  -if @article.test.present?
+    =form_tag test_passing_path(@article.test), method: :get, remote: true do
+      =submit_tag 'Test', class: 'btn btn-success'

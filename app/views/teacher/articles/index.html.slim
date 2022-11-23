@@ -1,6 +1,9 @@
-h1.mb-2 All articles
-
-=link_to 'Add article', new_teacher_article_path, class: 'btn btn-outline-primary btn-md mb-4 m-1'
+.fs-2.mb-4.d-inline-block
+  .p-0.d-inline-block.me-4
+    | All articles
+  .d-inline-block.me-3
+    =link_to new_teacher_article_path, class: 'icon-new', data_toggle: "tooltip", title: "New" do
+      i class="bi bi-plus-square"
 
 .card-columns
   =render @articles

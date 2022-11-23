@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2022_10_28_170652) do
   create_table "answers", force: :cascade do |t|
     t.boolean "correct", default: false, null: false
     t.string "content", null: false
+    t.text "description", default: ""
     t.bigint "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -67,8 +68,9 @@ ActiveRecord::Schema.define(version: 2022_10_28_170652) do
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "author_id", null: false
+    t.bigint "author_id"
     t.string "type", default: "Public", null: false
+    t.string "description"
     t.index ["author_id"], name: "index_articles_on_author_id"
   end
 
@@ -81,10 +83,12 @@ ActiveRecord::Schema.define(version: 2022_10_28_170652) do
   end
 
   create_table "tests", force: :cascade do |t|
-    t.string "title", default: "", null: false
+    t.string "title", default: ""
     t.bigint "author_id", null: false
+    t.bigint "article_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_id"], name: "index_tests_on_article_id"
     t.index ["author_id"], name: "index_tests_on_author_id"
   end
 

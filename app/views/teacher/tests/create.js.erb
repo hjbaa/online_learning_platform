@@ -1,0 +1,11 @@
+document.getElementById('new-test-errors').innerHTML = '<%= render 'shared/errors', object: @test %>'
+
+<% if @test.persisted? %>
+  let parentXNode = document.getElementById('new-test-errors').parentNode
+
+  while (parentXNode.firstChild) {
+      parentXNode.removeChild(parentXNode.firstChild);
+  }
+
+  parentXNode.innerHTML = '<%= j render @test %>'
+<% end %>

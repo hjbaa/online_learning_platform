@@ -32,18 +32,27 @@ class Teacher::ArticlesController < Teacher::BaseController
 
   def destroy
     @article.destroy
-    flash[:success] = 'Test was destroyed!'
+    flash[:success] = 'Article was destroyed!'
     redirect_to teacher_articles_path
   end
 
-  def show; end
+  def show
+    if @article.test.present?
+      @test = @article.test
+    else
+      # TODO: переписать по-человечески
+      @test = Test.new(author: current_user, article: @article)
+      @questions = @test.questions.build
+      @answers = @questions.answers.build
+    end
+  end
 
   def edit; end
 
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :type, files: [])
+    params.require(:article).permit(:title, :body, :type, :description, files: [])
   end
 
   def find_article

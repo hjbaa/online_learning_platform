@@ -1,0 +1,217 @@
+let quizObj = JSON.parse('<%=@test_json %>'.replace(/&quot;/g, '\"').replace(/&#39;/g, '\''));
+quizObj.currentQuestion = 0;
+quizObj.score = 0;
+quizObj.selected = [];
+
+function findMaxCorrect(quizObj) {
+    let count = 0;
+    quizObj.questions.forEach(questElement => {
+        questElement.answers.forEach(ansElement => {
+            if (ansElement.correct) {
+                count++;
+            }
+        })
+    })
+
+    return count;
+}
+
+quizObj.clearTestArea = function () {
+    let parentNode = document.getElementById('test-passage')
+    while (parentNode.firstChild) {
+        parentNode.removeChild(parentNode.firstChild);
+    }
+}
+
+quizObj.createQuizArea = function () {
+    const question = quizObj.questions[quizObj.currentQuestion]
+
+    const parentNode = document.getElementById('test-passage')
+
+    // Adding question's title
+    const titleArea = document.createElement('div');
+    titleArea.className += 'mb-3 fs-3';
+    const title = document.createElement('p');
+    title.innerText = 'Question #' + (quizObj.currentQuestion + 1) + ':\t' + question.title;
+    titleArea.appendChild(title);
+
+    const buttonArea = createAnswerButtonArea();
+
+    const emptyButton = document.createElement('a')
+    emptyButton.className += 'btn btn-outline-secondary mb-2 w-25'
+    emptyButton.setAttribute('href', 'javascript:;')
+    let counter = 0;
+
+    // Adding one button to one answer to document.
+    question.answers.forEach((element) => {
+        let buttonListElement = document.createElement('li');
+        buttonListElement.className += 'list-without-dots'
+
+        let answerArea = document.createElement('div');
+        answerArea.setAttribute('id', ('answer-' + counter))
+
+        let answerButton = emptyButton.cloneNode(false);
+        answerButton.innerText = element.content;
+        answerButton.dataset.number = counter.toString();
+        answerButton.setAttribute('id', ('answer-button-' + counter));
+        counter++;
+
+        answerButton.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            if (this.className.includes('btn-outline-secondary')){
+                this.className = this.className.replace('btn-outline-secondary', 'btn-primary');
+                quizObj.selected.push(Number(this.dataset.number));
+            } else {
+                this.className = this.className.replace('btn-primary', 'btn-outline-secondary');
+                let value = Number(this.dataset.number);
+                quizObj.selected = quizObj.selected.filter(function(item) {
+                    return item !== value
+                })
+            }
+        })
+
+        answerArea.appendChild(answerButton)
+        buttonListElement.appendChild(answerArea);
+
+        buttonArea.appendChild(buttonListElement)
+    })
+
+    const checkAnswersArea = createCheckAnswerButton();
+
+    parentNode.appendChild(titleArea);
+    parentNode.appendChild(buttonArea);
+    parentNode.appendChild(checkAnswersArea);
+}
+
+quizObj.checkAnswers = function () {
+    let index = 0;
+
+    quizObj.selected.forEach(selectedAnswerId => {
+        const answer = quizObj.questions[quizObj.currentQuestion].answers[selectedAnswerId]
+
+        if (answer.correct) {
+            quizObj.score++;
+        } else {
+            quizObj.score--;
+        }
+
+        index++;
+    });
+
+    for (let index = 0; index < quizObj.questions[quizObj.currentQuestion].answers.length; index++) {
+        const answer = quizObj.questions[quizObj.currentQuestion].answers[index]
+        const ansButton = document.getElementById('answer-button-' + index);
+        ansButton.className = 'btn btn-danger mb-2 w-25 disabled'
+
+        if (answer.correct) {
+            ansButton.className = 'btn btn-success mb-2 w-25 disabled'
+        }
+
+        const descriptionArea = document.createElement('div')
+        descriptionArea.className = 'alert alert-info';
+        descriptionArea.innerText = answer.description;
+
+        ansButton.parentNode.appendChild(descriptionArea)
+    }
+
+    const parentNode = document.getElementById('test-passage')
+    parentNode.removeChild(parentNode.lastChild)
+
+    parentNode.appendChild(createNextQuestionButton())
+}
+
+quizObj.nextQuestion = function () {
+    if (quizObj.isEnded()) {
+        quizObj.endQuiz();
+    } else {
+        quizObj.currentQuestion++;
+        quizObj.selected = [];
+
+        quizObj.clearTestArea();
+        quizObj.createQuizArea();
+    }
+}
+
+quizObj.isEnded = function () {
+    return quizObj.currentQuestion + 1 === quizObj.questions.length
+}
+
+quizObj.createQuiz = function () {
+    quizObj.clearTestArea();
+    quizObj.createQuizArea();
+}
+
+quizObj.endQuiz = function () {
+    quizObj.clearTestArea();
+
+    // TODO: пофиксить подсчёт результата
+    // TODO: добавить коллекцию для результатов
+    let resultPercent = quizObj.score / findMaxCorrect(quizObj) * 100;
+    let resultArea = document.createElement('div');
+    resultArea.className = 'fs-3 py-2';
+
+    let resultLine = document.createElement('p')
+    resultLine.innerText = 'Your result: ' + resultPercent + '%';
+
+    resultArea.appendChild(resultLine);
+
+    document.getElementById('test-passage').appendChild(resultArea);
+}
+
+quizObj.createQuiz();
+
+function createAnswerButtonArea () {
+    const buttonArea = document.createElement('div');
+    buttonArea.className += 'px-3 fs-4';
+    const buttonList = document.createElement('ul');
+    buttonArea.appendChild(buttonList);
+
+    return buttonArea;
+}
+
+function createCheckAnswerButton() {
+    let checkAnswersArea = document.createElement('div');
+    checkAnswersArea.className = 'py-3';
+
+    let checkAnswersButton = document.createElement('a');
+    checkAnswersButton.setAttribute('href', 'javascript:;')
+    checkAnswersButton.className = 'btn btn-success mb-2';
+
+    checkAnswersButton.innerText = 'Check answers';
+
+    checkAnswersButton.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        quizObj.checkAnswers()
+    })
+
+    checkAnswersArea.appendChild(checkAnswersButton)
+
+    return checkAnswersArea
+}
+
+function createNextQuestionButton() {
+    let nextQuestionArea = document.createElement('div');
+    nextQuestionArea.className = 'py-3';
+
+    let nextQuestionButton = document.createElement('a');
+    nextQuestionButton.setAttribute('href', 'javascript:;')
+    nextQuestionButton.className = 'btn btn-success mb-2';
+
+    if (quizObj.isEnded()) {
+        nextQuestionButton.innerText = 'End test';
+    } else {
+        nextQuestionButton.innerText = 'Next question';
+    }
+
+    nextQuestionButton.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        quizObj.nextQuestion();
+    })
+
+    nextQuestionArea.appendChild(nextQuestionButton)
+
+    return nextQuestionArea
+}

@@ -1,0 +1,11 @@
+= link_to teacher_test_path(test), class: 'icon-delete', data: { method: :delete, confirm: 'Are you sure?' },
+        data_toggle: "tooltip", title: "Delete" do
+  i class="bi bi-trash"
+.fs-4
+  - if test.title
+    ul
+      li.item
+        | Test "#{test.title}"
+      = render partial: 'teacher/questions/question', collection: test.questions
+  -else
+    = render partial: 'teacher/questions/question', collection: test.questions

@@ -1,0 +1,15 @@
+.nested-fields
+  .mb-2.row
+    .col-sm-1.fs-3
+      = link_to_remove_association f, data_toggle: "tooltip", title: "Delete", class: 'icon-delete' do
+        i class="bi bi-trash"
+    .col-sm-11
+      .input-group
+        .input-group-prepend
+          .input-group-text.fs-5.rounded-0
+            =f.check_box :correct, {class: 'form-check-input', data_toggle: "tooltip", title: "Correct answer"}, true, false
+        =f.text_field :content, placeholder: 'Content', class: 'form-control'
+  .row.mb-4
+    .col-sm-1
+    .col-sm-11
+      =f.text_area :description, placeholder: 'Describe why this question is correct/incorrect', class: 'form-control'
