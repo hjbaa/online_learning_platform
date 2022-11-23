@@ -13,7 +13,6 @@
     hr
       .mb-3
         =f.fields_for :answers do |a|
-      / =render 'teacher/answers/answer_fields', :f => a
 
     .add-answer-link
       =link_to_add_association "Add answer", f, :answers, partial: 'teacher/answers/answer_fields', class: 'btn btn-outline-success'

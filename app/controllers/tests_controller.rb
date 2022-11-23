@@ -7,8 +7,6 @@ class TestsController < ApplicationController
                                include: { questions: { only: :title,
                                                        include: { answers: { only: %i[content correct description] } } } })
     @test_json.gsub!('\"', '\'').gsub!("'", '\'')
-
-    puts "\n\n\n#{@test_json}\n\n\n"
   end
 
   private
