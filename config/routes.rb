@@ -4,9 +4,16 @@ Rails.application.routes.draw do
 
   resources :articles, only: %i[index show]
 
+
   namespace :teacher do
-    resources :articles
+    get '/', to: 'teachers#show', as: ''
+
+    resources :subjects do
+      resources :articles, shallow: true
+    end
+
     resources :tests, only: %i[create destroy]
+    resources :groups
   end
 
   get '/tests/:id', to: 'tests#test_passing', as: 'test_passing'

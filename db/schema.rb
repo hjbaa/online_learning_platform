@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_26_105930) do
+ActiveRecord::Schema.define(version: 2022_11_27_053727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,7 +71,9 @@ ActiveRecord::Schema.define(version: 2022_11_26_105930) do
     t.bigint "author_id"
     t.string "type", default: "Public", null: false
     t.string "description"
+    t.bigint "subject_id"
     t.index ["author_id"], name: "index_articles_on_author_id"
+    t.index ["subject_id"], name: "index_articles_on_subject_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -103,13 +105,16 @@ ActiveRecord::Schema.define(version: 2022_11_26_105930) do
     t.bigint "article_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "subject_id"
     t.index ["article_id"], name: "index_tests_on_article_id"
     t.index ["author_id"], name: "index_tests_on_author_id"
+    t.index ["subject_id"], name: "index_tests_on_subject_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
+    t.string "institution", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -128,9 +133,11 @@ ActiveRecord::Schema.define(version: 2022_11_26_105930) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "questions"
+  add_foreign_key "articles", "subjects"
   add_foreign_key "articles", "users", column: "author_id"
   add_foreign_key "groups", "users", column: "major_teacher_id"
   add_foreign_key "questions", "tests"
+  add_foreign_key "tests", "subjects"
   add_foreign_key "tests", "users", column: "author_id"
   add_foreign_key "users", "groups"
 end
