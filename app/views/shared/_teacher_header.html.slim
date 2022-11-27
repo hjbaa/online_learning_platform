@@ -1,5 +1,5 @@
 .container
-  nav class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+  nav class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start fs-4"
     ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
       li =link_to 'Online Learning', root_path, class: 'nav-link px-2 text-white'
       li =link_to "Teacher's stuff", teacher_path, class: 'nav-link px-2 text-white'
@@ -17,3 +17,13 @@
             hr class="dropdown-divider"
 
           li = link_to 'Log out', destroy_user_session_path, class: 'dropdown-item', data: { method: :delete }
+
+  nav.fs-5.navbar-expand-lg.border.rounded-3
+    .collapse.navbar-collapse#navbarSupportedContent
+      ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+        li.px-5
+          = link_to 'Subjects', teacher_subjects_path, class: 'nav-link text-white'
+        li.px-5
+          = link_to 'Groups', teacher_groups_path, class: 'nav-link text-white'
+        li.px-5
+          = link_to 'Results', '#', class: 'nav-link text-white'

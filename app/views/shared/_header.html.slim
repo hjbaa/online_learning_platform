@@ -1,5 +1,5 @@
 .container
-  nav class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+  nav class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start fs-4"
     ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
       li =link_to 'Online Learning', root_path, class: 'nav-link px-2 text-white'
       -if current_user.is_a?(Teacher)
@@ -21,4 +21,4 @@
             li = link_to 'Log out', destroy_user_session_path, class: 'dropdown-item', data: { method: :delete }
       - else
         li = link_to 'Sign Up', new_user_registration_path, class: 'nav-link px-2 text-white'
-        li = link_to 'Log In', new_user_session_path, class: 'nav-link px-2 text-white'
+        li = link_to 'Log In', new_user_session_path, class: 'nav-link px-2 text-white'\

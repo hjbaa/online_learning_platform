@@ -4,7 +4,6 @@ class Teacher::BaseController < ApplicationController
   before_action :authenticate_user!
   before_action :teacher_required!
 
-
   private
 
   def teacher_required!
