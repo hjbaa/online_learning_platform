@@ -3,14 +3,13 @@ quizObj.currentQuestion = 0;
 quizObj.score = 0;
 quizObj.selected = [];
 
-function findMaxCorrect(quizObj) {
+function findMaxCorrect(question) {
     let count = 0;
-    quizObj.questions.forEach(questElement => {
-        questElement.answers.forEach(ansElement => {
-            if (ansElement.correct) {
-                count++;
-            }
-        })
+
+    question.answers.forEach(ansElement => {
+        if (ansElement.correct) {
+            count++;
+        }
     })
 
     return count;
@@ -85,40 +84,57 @@ quizObj.createQuizArea = function () {
 }
 
 quizObj.checkAnswers = function () {
-    let index = 0;
+    let questionMaxScore = findMaxCorrect(quizObj.questions[quizObj.currentQuestion]);
+
+    if (questionMaxScore === 0) {
+        if (quizObj.selected === []) {
+            quizObj.score ++;
+        }
+
+        quizObj.showAnswerDescription();
+        return;
+    }
+
+    let tmpScore = 0;
+    let flag = true;
 
     quizObj.selected.forEach(selectedAnswerId => {
-        const answer = quizObj.questions[quizObj.currentQuestion].answers[selectedAnswerId]
+        const answer = quizObj.questions[quizObj.currentQuestion].answers[selectedAnswerId];
 
-        if (answer.correct) {
-            quizObj.score++;
+        if (flag && answer.correct) {
+            tmpScore++
         } else {
-            quizObj.score--;
+            tmpScore = 0;
+            flag = false;
         }
-
-        index++;
     });
 
+    quizObj.score += (tmpScore / questionMaxScore).toFixed(2);
+
+    quizObj.showAnswerDescription();
+}
+
+quizObj.showAnswerDescription = function () {
     for (let index = 0; index < quizObj.questions[quizObj.currentQuestion].answers.length; index++) {
-        const answer = quizObj.questions[quizObj.currentQuestion].answers[index]
+        const answer = quizObj.questions[quizObj.currentQuestion].answers[index];
         const ansButton = document.getElementById('answer-button-' + index);
-        ansButton.className = 'btn btn-danger mb-2 w-25 disabled'
+        ansButton.className = 'btn btn-danger mb-2 w-25 disabled';
 
         if (answer.correct) {
-            ansButton.className = 'btn btn-success mb-2 w-25 disabled'
+            ansButton.className = 'btn btn-success mb-2 w-25 disabled';
         }
 
-        const descriptionArea = document.createElement('div')
+        const descriptionArea = document.createElement('div');
         descriptionArea.className = 'alert alert-info';
         descriptionArea.innerText = answer.description;
 
-        ansButton.parentNode.appendChild(descriptionArea)
+        ansButton.parentNode.appendChild(descriptionArea);
     }
 
-    const parentNode = document.getElementById('test-passage')
-    parentNode.removeChild(parentNode.lastChild)
+    const parentNode = document.getElementById('test-passage');
+    parentNode.removeChild(parentNode.lastChild);
 
-    parentNode.appendChild(createNextQuestionButton())
+    parentNode.appendChild(createNextQuestionButton());
 }
 
 quizObj.nextQuestion = function () {
@@ -145,9 +161,8 @@ quizObj.createQuiz = function () {
 quizObj.endQuiz = function () {
     quizObj.clearTestArea();
 
-    // TODO: пофиксить подсчёт результата
     // TODO: добавить коллекцию для результатов
-    let resultPercent = quizObj.score / findMaxCorrect(quizObj) * 100;
+    let resultPercent = quizObj.score / quizObj.questions.length * 100;
     let resultArea = document.createElement('div');
     resultArea.className = 'fs-3 py-2';
 

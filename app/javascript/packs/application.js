@@ -9,8 +9,7 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "./tests/test_creation"
 
-import '@popperjs/core'
-import 'bootstrap/js/dist/dropdown'
+import 'bootstrap'
 import "@oddcamp/cocoon-vanilla-js";
 import "trix"
 import "@rails/actiontext"

@@ -1,1 +1,9 @@
-p hello wrodl
+.fs-2.mb-4.d-inline-block
+  .p-0.d-inline-block.me-4
+    | Subjects
+  .d-inline-block.me-3
+    =link_to new_teacher_subject_path, class: 'icon-new', data_toggle: "tooltip", title: "New" do
+      i class="bi bi-plus-square"
+
+ul.fs-4
+  =render @subjects

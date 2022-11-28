@@ -1,0 +1,6 @@
+=render 'shared/errors', object: subject
+
+=form_with model: [:teacher, subject], local: true do |f|
+  =render 'teacher/subjects/subject_fields', f: f
+
+  =f.submit 'Submit', class: 'btn btn-outline-primary btn-md mb-4'

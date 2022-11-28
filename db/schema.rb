@@ -94,9 +94,9 @@ ActiveRecord::Schema.define(version: 2022_11_27_053727) do
 
   create_table "subjects", force: :cascade do |t|
     t.string "title", null: false
-    t.string "category", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["title"], name: "index_subjects_on_title", unique: true
   end
 
   create_table "tests", force: :cascade do |t|
