@@ -1,0 +1,25 @@
+.fs-2.mb-4.d-inline-block
+  .p-0.d-inline-block.me-4
+    | Your groups
+  .d-inline-block.me-3
+    =link_to '#', class: 'icon-new', data_toggle: "tooltip", title: "New", id: 'new-group-btn' do
+      i class="bi bi-plus-square"
+
+
+.hidden.mx-3#new-group-form
+  #new-group-errors
+    =render 'shared/errors', object: @group
+
+  =render 'teacher/groups/form', group: @group
+
+table.table.table-striped
+  thead
+    tr
+      th
+        | Name
+      th
+        | Number of students
+      th
+        | Actions
+  tbody#groups-list
+    =render @groups

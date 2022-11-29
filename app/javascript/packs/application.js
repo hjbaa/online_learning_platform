@@ -8,6 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "./tests/test_creation"
+import "./groups/new_group"
 
 import 'bootstrap'
 import "@oddcamp/cocoon-vanilla-js";
