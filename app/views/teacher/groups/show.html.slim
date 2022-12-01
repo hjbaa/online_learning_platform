@@ -5,7 +5,7 @@
   .p-0.d-inline-block.me-4
     | Members
   .d-inline-block.me-3
-    =link_to '#', class: 'icon-new', data_toggle: "tooltip", title: "New", id: 'add-new-student' do
+    button.border-0.bg-white [data-bs-toggle="modal" data-bs-target="#studentsModal"]
       i class="bi bi-plus-square"
 
 table.table.table-striped
@@ -24,3 +24,35 @@ table.table.table-striped
         td
           =link_to '#', class: 'icon-delete', data_toggle: "tooltip", title: "Kick", id: 'new-group-btn' do
             i class="bi bi-trash"
+
+
+#studentsModal.modal.fade[tabindex="-1" aria-labelledby="studentsModalLabel" aria-hidden="true"]
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        h5#studentsModalLabel.modal-title
+          | Add student to the group
+        button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+      .modal-body
+        input.form-control.mb-4#search-text type="text" placeholder="Name, surname or email"
+        table.table.table-hover#info-table
+          thead
+            tr
+              th Name
+              th Surname
+              th Email
+              th Institution
+              th
+          tbody
+            -Student.where(group_id: nil).each do |student|
+              tr
+                td =student.name
+                td =student.last_name
+                td =student.email
+                td =student.institution
+                td =link_to '#' do
+                  i.bi.bi-plus
+      .modal-footer
+        button.btn.btn-primary[type="button" data-bs-dismiss="modal"]
+          | Save
+

@@ -9,6 +9,7 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "./tests/test_creation"
 import "./groups/new_group"
+import "./groups/find-student"
 
 import 'bootstrap'
 import "@oddcamp/cocoon-vanilla-js";
