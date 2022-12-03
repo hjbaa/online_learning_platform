@@ -1,0 +1,8 @@
+tr id="group-student-#{student.id}"
+  td =student.name
+  td =student.last_name
+  td =student.institution
+  td
+    =link_to teacher_kick_from_group_path(student_id: student.id), class: 'icon-delete', data_toggle: "tooltip",
+            remote: true, title: "Kick", method: :post do
+      i class="bi bi-trash"
