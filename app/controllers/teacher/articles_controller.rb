@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class Teacher::ArticlesController < Teacher::BaseController
-  before_action :find_article, only: %i[show edit update destroy start update_inline]
+  before_action :find_article, only: %i[show edit update destroy start]
 
   def index
     @articles = Article.all

@@ -101,8 +101,11 @@ ActiveRecord::Schema.define(version: 2022_11_29_014932) do
 
   create_table "subjects", force: :cascade do |t|
     t.string "title", null: false
+    t.text "description"
+    t.bigint "author_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_subjects_on_author_id"
     t.index ["title"], name: "index_subjects_on_title", unique: true
   end
 
@@ -144,6 +147,7 @@ ActiveRecord::Schema.define(version: 2022_11_29_014932) do
   add_foreign_key "articles", "users", column: "author_id"
   add_foreign_key "groups", "users", column: "major_teacher_id"
   add_foreign_key "questions", "tests"
+  add_foreign_key "subjects", "users", column: "author_id"
   add_foreign_key "tests", "subjects"
   add_foreign_key "tests", "users", column: "author_id"
   add_foreign_key "users", "groups"
