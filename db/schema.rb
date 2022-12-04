@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_29_014932) do
+ActiveRecord::Schema.define(version: 2022_12_04_182058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,16 @@ ActiveRecord::Schema.define(version: 2022_11_29_014932) do
     t.index ["type"], name: "index_users_on_type"
   end
 
+  create_table "visibilities", force: :cascade do |t|
+    t.bigint "subject_id", null: false
+    t.bigint "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_visibilities_on_group_id"
+    t.index ["subject_id", "group_id"], name: "index_visibilities_on_subject_id_and_group_id", unique: true
+    t.index ["subject_id"], name: "index_visibilities_on_subject_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "questions"
@@ -151,4 +161,6 @@ ActiveRecord::Schema.define(version: 2022_11_29_014932) do
   add_foreign_key "tests", "subjects"
   add_foreign_key "tests", "users", column: "author_id"
   add_foreign_key "users", "groups"
+  add_foreign_key "visibilities", "groups"
+  add_foreign_key "visibilities", "subjects"
 end

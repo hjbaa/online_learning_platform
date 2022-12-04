@@ -1,6 +1,14 @@
 class SubjectsController < ApplicationController
+  before_action :authenticate_user!
   def index
-    @subjects = Subject.all
+    @subjects = case current_user
+                when Admin
+                  Subject.all
+                when Teacher
+                  Subject.where(author: current_user)
+                else
+                  current_user.group.visible_subjects
+                end
   end
 
   def show

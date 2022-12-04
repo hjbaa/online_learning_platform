@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
     resources :tests, only: %i[create destroy]
     resources :groups
+    resources :visibilities, only: %i[create destroy]
 
     post '/group/:id/add-student/:student_id', to: 'groups#add_to_group', as: 'add_to_group'
     post '/group/:id/kick-student/:student_id', to: 'groups#kick_from_group', as: 'kick_from_group'

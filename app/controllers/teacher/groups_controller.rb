@@ -1,5 +1,5 @@
 class Teacher::GroupsController < Teacher::BaseController
-  before_action :find_group, only: %i[destroy show add_to_group kick_from_group]
+  before_action :find_group, only: %i[destroy add_to_group kick_from_group]
 
   def index
     @groups = current_user.controlled_groups
@@ -15,7 +15,10 @@ class Teacher::GroupsController < Teacher::BaseController
 
   def update; end
 
-  def show; end
+  def show
+    @group = Group.includes(:visible_subjects).find(params[:id])
+    @visibility = @group.visibilities.new
+  end
 
   def destroy
     return head(:forbidden) unless @group.major_teacher == current_user
