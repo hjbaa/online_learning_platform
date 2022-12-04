@@ -1,5 +1,7 @@
 document.addEventListener('turbolinks:load', () => {
-    document.getElementById('search-text').addEventListener('keyup', tableSearch)
+    if (document.getElementById('search-text')) {
+        document.getElementById('search-text').addEventListener('keyup', tableSearch)
+    }
 })
 
 function tableSearch() {

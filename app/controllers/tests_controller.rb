@@ -6,7 +6,7 @@ class TestsController < ApplicationController
     @test_json = @test.to_json(only: :title,
                                include: { questions: { only: :title,
                                                        include: { answers: { only: %i[content correct description] } } } })
-    @test_json.gsub!('\"', '\'').gsub!("'", '\'')
+    @test_json = @test_json.gsub('\"', '\'').gsub("'", '\'')
   end
 
   private

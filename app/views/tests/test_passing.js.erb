@@ -109,7 +109,7 @@ quizObj.checkAnswers = function () {
         }
     });
 
-    quizObj.score += (tmpScore / questionMaxScore).toFixed(2);
+    quizObj.score += Number((tmpScore / questionMaxScore).toFixed(2));
 
     quizObj.showAnswerDescription();
 }
