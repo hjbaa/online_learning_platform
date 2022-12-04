@@ -3,13 +3,18 @@ class Teacher::VisibilitiesController < Teacher::BaseController
   def create
     @visibility = Visibility.new(visibility_params)
 
-    flash[:danger] = "hueta" unless @visibility.save
-
-    redirect_to @visibility.group
+    if @visibility.save
+      redirect_to teacher_group_path(@visibility.group)
+    else
+      flash[:alert] = 'Not saved!'
+      redirect_to teacher_groups_path
+    end
   end
 
   def destroy
+    @visibility = Visibility.find(params[:id])
 
+    redirect_to teacher_group_path(@visibility.destroy.group)
   end
 
   private

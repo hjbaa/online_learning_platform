@@ -27,7 +27,14 @@ table.table.table-striped
       i class="bi bi-plus-square"
 
 ul
-  =render @group.visible_subjects
+  -@group.visible_subjects.each do |subject|
+    li
+      .fs-4.mb-4.d-inline-block
+        .p-0.d-inline-block.me-4
+          =link_to subject.title, teacher_subject_path(subject), class: 'link-primary'
+        .d-inline-block.me-3
+          =link_to teacher_visibility_path(visibility_for(@group, subject)), class: 'icon-delete', data: { method: :delete, confirm: 'Are you sure?' } do
+            i class="bi bi-trash"
 
 #studentsModal.modal.fade[tabindex="-1" aria-labelledby="studentsModalLabel" aria-hidden="true"]
   .modal-dialog.modal-lg
@@ -63,7 +70,7 @@ ul
       .modal-body
         =form_with model: [:teacher, @visibility], local: true do |f|
           .hidden
-            =f.number_field :group_id, value: @group.id, disabled: true
+            =f.number_field :group_id, value: @group.id, class: 'disabled'
 
           .row.mb-2
             .col-sm-2.col-form-label.fs-5
