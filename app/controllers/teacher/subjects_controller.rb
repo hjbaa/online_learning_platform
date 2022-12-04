@@ -18,6 +18,8 @@ class Teacher::SubjectsController < Teacher::BaseController
   def edit; end
 
   def update
+    return head(:forbidden) unless current_user.author_of?(@subject)
+
     @subject.update(subject_params)
 
     redirect_to teacher_subject_path(@subject)

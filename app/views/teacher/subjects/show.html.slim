@@ -17,7 +17,8 @@
   .accordion-item
     h2#panelsStayOpen-headingOne.accordion-header
       button.accordion-button aria-controls="panelsStayOpen-collapseOne" aria-expanded="true" data-bs-target="#panelsStayOpen-collapseOne" data-bs-toggle="collapse" type="button"
-        strong Description
+        .fs-4
+          strong Description
     #panelsStayOpen-collapseOne.accordion-collapse.collapse.show aria-labelledby="panelsStayOpen-headingOne"
       .accordion-body.fs-4
         =sanitize @subject.description.to_s
@@ -25,15 +26,21 @@
   .accordion-item
     h2#panelsStayOpen-headingTwo.accordion-header
       button.accordion-button.collapsed aria-controls="panelsStayOpen-collapseTwo" aria-expanded="false" data-bs-target="#panelsStayOpen-collapseTwo" data-bs-toggle="collapse" type="button"
-        strong Educational materials
+        .fs-4.d-inline-block
+          .p-0.d-inline-block.me-4
+            strong Educational materials
+          .d-inline-block.me-3
+            = link_to new_teacher_subject_article_path(@subject), class: 'icon-new', data_toggle: "tooltip", title: "New" do
+              i class="bi bi-plus-square"
     #panelsStayOpen-collapseTwo.accordion-collapse.collapse aria-labelledby="panelsStayOpen-headingTwo"
       .accordion-body.fs-4
-        p This is the second item's accordion body.
+        =render @subject.articles
 
   .accordion-item
     h2#panelsStayOpen-headingThree.accordion-header
       button.accordion-button.collapsed aria-controls="panelsStayOpen-collapseThree" aria-expanded="false" data-bs-target="#panelsStayOpen-collapseThree" data-bs-toggle="collapse" type="button"
-        strong Tests
+        .fs-4
+          strong Tests
     #panelsStayOpen-collapseThree.accordion-collapse.collapse aria-labelledby="panelsStayOpen-headingThree"
       .accordion-body.fs-4
         p This is the third item's accordion body.

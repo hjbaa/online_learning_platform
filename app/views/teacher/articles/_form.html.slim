@@ -1,6 +1,6 @@
 =render 'shared/errors', object: @article
 
-=form_with model: [:teacher, @article], local: true do |f|
+=form_with model: [:teacher, @subject, @article], local: true do |f|
   =render 'article_fields', f: f
 
   =f.submit 'Submit', class: 'btn btn-outline-primary btn-md mb-4'
