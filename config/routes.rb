@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
-  root 'articles#index'
+  root 'subjects#index'
 
-  resources :articles, only: %i[index show]
-
+  resources :subjects, only: %i[index show] do
+    resources :articles, only: %i[show], shallow: true
+  end
 
   namespace :teacher do
     get '/', to: 'teachers#show', as: ''
