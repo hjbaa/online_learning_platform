@@ -42,7 +42,7 @@ class Teacher::ArticlesController < Teacher::BaseController
       @test = @article.test
     else
       # TODO: переписать по-человечески
-      @test = Test.new(author: current_user, article: @article)
+      @test = Test.new(author: current_user, testable: @article)
       @questions = @test.questions.build
       @answers = @questions.answers.build
     end

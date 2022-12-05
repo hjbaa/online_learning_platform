@@ -112,13 +112,12 @@ ActiveRecord::Schema.define(version: 2022_12_04_182058) do
   create_table "tests", force: :cascade do |t|
     t.string "title", default: ""
     t.bigint "author_id", null: false
-    t.bigint "article_id"
+    t.string "testable_type"
+    t.bigint "testable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "subject_id"
-    t.index ["article_id"], name: "index_tests_on_article_id"
     t.index ["author_id"], name: "index_tests_on_author_id"
-    t.index ["subject_id"], name: "index_tests_on_subject_id"
+    t.index ["testable_type", "testable_id"], name: "index_tests_on_testable"
   end
 
   create_table "users", force: :cascade do |t|
@@ -158,7 +157,6 @@ ActiveRecord::Schema.define(version: 2022_12_04_182058) do
   add_foreign_key "groups", "users", column: "major_teacher_id"
   add_foreign_key "questions", "tests"
   add_foreign_key "subjects", "users", column: "author_id"
-  add_foreign_key "tests", "subjects"
   add_foreign_key "tests", "users", column: "author_id"
   add_foreign_key "users", "groups"
   add_foreign_key "visibilities", "groups"

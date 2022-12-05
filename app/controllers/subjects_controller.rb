@@ -7,7 +7,7 @@ class SubjectsController < ApplicationController
                 when Teacher
                   Subject.where(author: current_user)
                 else
-                  current_user.group.visible_subjects
+                  current_user&.group&.visible_subjects || Subject.all
                 end
   end
 
