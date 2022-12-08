@@ -10,47 +10,55 @@ function findMaxCorrect(question) {
         if (ansElement.correct) {
             count++;
         }
-    })
+    });
 
     return count;
 }
 
 quizObj.clearTestArea = function () {
-    let parentNode = document.getElementById('test-passage')
+    let parentNode = document.getElementById('test-passage');
     while (parentNode.firstChild) {
         parentNode.removeChild(parentNode.firstChild);
     }
 }
 
 quizObj.createQuizArea = function () {
-    const question = quizObj.questions[quizObj.currentQuestion]
+    const question = quizObj.questions[quizObj.currentQuestion];
 
-    const parentNode = document.getElementById('test-passage')
+    const parentNode = document.getElementById('test-passage');
 
     // Adding question's title
-    const titleArea = document.createElement('div');
-    titleArea.className += 'mb-3 fs-3';
-    const title = document.createElement('p');
-    title.innerText = 'Question #' + (quizObj.currentQuestion + 1) + ':\t' + question.title;
-    titleArea.appendChild(title);
+    parentNode.appendChild(
+      Object.assign(
+        document.createElement('div'),
+        { className: 'mb-3 fs-3' }
+      ).appendChild(
+        Object.assign(
+            document.createElement('p'),
+            { innerText: 'Question #' + (quizObj.currentQuestion + 1) + ':\t' + question.title }
+        )
+      )
+    );
 
     const buttonArea = createAnswerButtonArea();
 
-    const emptyButton = document.createElement('a')
-    emptyButton.className += 'btn btn-outline-secondary mb-2 w-25'
-    emptyButton.setAttribute('href', 'javascript:;')
+    const emptyButton = Object.assign(
+      document.createElement('a'),
+      { className: 'btn btn-outline-secondary mb-2 w-25', href: 'javascript:;' }
+    );
+
     let counter = 0;
 
     // Adding one button to one answer to document.
-    question.answers.forEach((element) => {
+    question.answers.forEach((answer) => {
         let buttonListElement = document.createElement('li');
-        buttonListElement.className += 'list-without-dots'
+        buttonListElement.className += 'list-without-dots';
 
         let answerArea = document.createElement('div');
-        answerArea.setAttribute('id', ('answer-' + counter))
+        answerArea.setAttribute('id', ('answer-' + counter));
 
         let answerButton = emptyButton.cloneNode(false);
-        answerButton.innerText = element.content;
+        answerButton.innerText = answer.content;
         answerButton.dataset.number = counter.toString();
         answerButton.setAttribute('id', ('answer-button-' + counter));
         counter++;
@@ -58,27 +66,27 @@ quizObj.createQuizArea = function () {
         answerButton.addEventListener('click', function (event) {
             event.preventDefault();
 
-            if (this.className.includes('btn-outline-secondary')){
+            // смена класса для отображения выбрано/не выбрано
+            if (this.className.includes('btn-outline-secondary')) {
                 this.className = this.className.replace('btn-outline-secondary', 'btn-primary');
                 quizObj.selected.push(Number(this.dataset.number));
             } else {
                 this.className = this.className.replace('btn-primary', 'btn-outline-secondary');
                 let value = Number(this.dataset.number);
                 quizObj.selected = quizObj.selected.filter(function(item) {
-                    return item !== value
+                    return item !== value;
                 })
             }
         })
 
-        answerArea.appendChild(answerButton)
+        answerArea.appendChild(answerButton);
         buttonListElement.appendChild(answerArea);
 
-        buttonArea.appendChild(buttonListElement)
+        buttonArea.appendChild(buttonListElement);
     })
 
     const checkAnswersArea = createCheckAnswerButton();
 
-    parentNode.appendChild(titleArea);
     parentNode.appendChild(buttonArea);
     parentNode.appendChild(checkAnswersArea);
 }
@@ -102,7 +110,7 @@ quizObj.checkAnswers = function () {
         const answer = quizObj.questions[quizObj.currentQuestion].answers[selectedAnswerId];
 
         if (flag && answer.correct) {
-            tmpScore++
+            tmpScore++;
         } else {
             tmpScore = 0;
             flag = false;
@@ -150,7 +158,7 @@ quizObj.nextQuestion = function () {
 }
 
 quizObj.isEnded = function () {
-    return quizObj.currentQuestion + 1 === quizObj.questions.length
+    return quizObj.currentQuestion + 1 === quizObj.questions.length;
 }
 
 quizObj.createQuiz = function () {
@@ -166,7 +174,7 @@ quizObj.endQuiz = function () {
     let resultArea = document.createElement('div');
     resultArea.className = 'fs-3 py-2';
 
-    let resultLine = document.createElement('p')
+    let resultLine = document.createElement('p');
     resultLine.innerText = 'Your result: ' + resultPercent + '%';
 
     resultArea.appendChild(resultLine);
@@ -190,7 +198,7 @@ function createCheckAnswerButton() {
     checkAnswersArea.className = 'py-3';
 
     let checkAnswersButton = document.createElement('a');
-    checkAnswersButton.setAttribute('href', 'javascript:;')
+    checkAnswersButton.setAttribute('href', 'javascript:;');
     checkAnswersButton.className = 'btn btn-success mb-2';
 
     checkAnswersButton.innerText = 'Check answers';
@@ -198,12 +206,12 @@ function createCheckAnswerButton() {
     checkAnswersButton.addEventListener('click', function (event) {
         event.preventDefault();
 
-        quizObj.checkAnswers()
+        quizObj.checkAnswers();
     })
 
-    checkAnswersArea.appendChild(checkAnswersButton)
+    checkAnswersArea.appendChild(checkAnswersButton);
 
-    return checkAnswersArea
+    return checkAnswersArea;
 }
 
 function createNextQuestionButton() {
@@ -211,7 +219,7 @@ function createNextQuestionButton() {
     nextQuestionArea.className = 'py-3';
 
     let nextQuestionButton = document.createElement('a');
-    nextQuestionButton.setAttribute('href', 'javascript:;')
+    nextQuestionButton.setAttribute('href', 'javascript:;');
     nextQuestionButton.className = 'btn btn-success mb-2';
 
     if (quizObj.isEnded()) {
@@ -226,7 +234,7 @@ function createNextQuestionButton() {
         quizObj.nextQuestion();
     })
 
-    nextQuestionArea.appendChild(nextQuestionButton)
+    nextQuestionArea.appendChild(nextQuestionButton);
 
-    return nextQuestionArea
+    return nextQuestionArea;
 }
