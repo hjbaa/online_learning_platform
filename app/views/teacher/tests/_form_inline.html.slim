@@ -1,6 +1,6 @@
 =render 'shared/errors', object: test
 
-=form_with model: [:teacher, test], local: true do |f|
+=form_with model: [:teacher, test], local: false do |f|
   = f.number_field :author_id, class: 'hidden'
   = f.number_field :testable_id, class: 'hidden'
   = f.text_field :testable_type, class: 'hidden'

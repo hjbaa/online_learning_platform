@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 2022_12_04_182058) do
   create_table "questions", force: :cascade do |t|
     t.string "title", null: false
     t.bigint "test_id", null: false
+    t.string "type", default: "MultipleOptionQuestion", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["test_id"], name: "index_questions_on_test_id"
@@ -111,6 +112,7 @@ ActiveRecord::Schema.define(version: 2022_12_04_182058) do
 
   create_table "tests", force: :cascade do |t|
     t.string "title", default: ""
+    t.integer "seconds_for_passage"
     t.bigint "author_id", null: false
     t.string "testable_type"
     t.bigint "testable_id"

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       resources :articles, shallow: true
     end
 
-    resources :tests, only: %i[create destroy]
+    resources :tests, except: :index
     resources :groups
     resources :visibilities, only: %i[create destroy]
 

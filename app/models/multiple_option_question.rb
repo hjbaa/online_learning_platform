@@ -1,0 +1,3 @@
+class MultipleOptionQuestion < Question
+
+end
