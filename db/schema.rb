@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_28_170652) do
+ActiveRecord::Schema.define(version: 2022_12_04_182058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,7 +71,24 @@ ActiveRecord::Schema.define(version: 2022_10_28_170652) do
     t.bigint "author_id"
     t.string "type", default: "Public", null: false
     t.string "description"
+    t.bigint "subject_id"
     t.index ["author_id"], name: "index_articles_on_author_id"
+    t.index ["subject_id"], name: "index_articles_on_subject_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.bigint "major_teacher_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["major_teacher_id"], name: "index_groups_on_major_teacher_id"
+  end
+
+  create_table "groups_users", id: false, force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["group_id"], name: "index_groups_users_on_group_id"
+    t.index ["user_id"], name: "index_groups_users_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -82,19 +99,31 @@ ActiveRecord::Schema.define(version: 2022_10_28_170652) do
     t.index ["test_id"], name: "index_questions_on_test_id"
   end
 
+  create_table "subjects", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.bigint "author_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_subjects_on_author_id"
+    t.index ["title"], name: "index_subjects_on_title", unique: true
+  end
+
   create_table "tests", force: :cascade do |t|
     t.string "title", default: ""
     t.bigint "author_id", null: false
-    t.bigint "article_id"
+    t.string "testable_type"
+    t.bigint "testable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["article_id"], name: "index_tests_on_article_id"
     t.index ["author_id"], name: "index_tests_on_author_id"
+    t.index ["testable_type", "testable_id"], name: "index_tests_on_testable"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
+    t.string "institution", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -103,15 +132,33 @@ ActiveRecord::Schema.define(version: 2022_10_28_170652) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "type", default: "Student", null: false
     t.string "last_name"
+    t.bigint "group_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["type"], name: "index_users_on_type"
+  end
+
+  create_table "visibilities", force: :cascade do |t|
+    t.bigint "subject_id", null: false
+    t.bigint "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_visibilities_on_group_id"
+    t.index ["subject_id", "group_id"], name: "index_visibilities_on_subject_id_and_group_id", unique: true
+    t.index ["subject_id"], name: "index_visibilities_on_subject_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "questions"
+  add_foreign_key "articles", "subjects"
   add_foreign_key "articles", "users", column: "author_id"
+  add_foreign_key "groups", "users", column: "major_teacher_id"
   add_foreign_key "questions", "tests"
+  add_foreign_key "subjects", "users", column: "author_id"
   add_foreign_key "tests", "users", column: "author_id"
+  add_foreign_key "users", "groups"
+  add_foreign_key "visibilities", "groups"
+  add_foreign_key "visibilities", "subjects"
 end

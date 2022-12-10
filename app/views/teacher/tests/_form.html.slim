@@ -2,7 +2,8 @@
 
 =form_with model: [:teacher, test], local: false do |f|
   = f.number_field :author_id, class: 'hidden'
-  = f.number_field :article_id, class: 'hidden'
+  = f.number_field :testable_id, class: 'hidden'
+  = f.text_field :testable_type, class: 'hidden'
 
   =f.text_field :title, placeholder: 'Title', class: 'form-control form-control-lg w-100'
 

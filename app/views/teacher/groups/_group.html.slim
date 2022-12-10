@@ -1,0 +1,16 @@
+tr
+  td
+    =link_to group.name, teacher_group_path(group)
+  td
+    | #{group.students.count}
+  td
+    .fs-5.d-inline-block
+      .d-inline-block.me-3
+        = link_to edit_teacher_group_path(group), class: 'icon-edit', data_toggle: "tooltip", title: "Edit" do
+          i class="bi bi-pencil-square"
+
+      -if group.major_teacher == current_user
+        .d-inline-block
+          = link_to teacher_group_path(group), class: 'icon-delete', data: { method: :delete, confirm: 'Are you sure?' },
+                  data_toggle: "tooltip", title: "Delete", remote: true do
+            i class="bi bi-trash"

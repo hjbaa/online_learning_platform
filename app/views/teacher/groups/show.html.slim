@@ -1,0 +1,84 @@
+.fs-2.mb-4
+  | #{@group.name}
+
+.fs-4.mb-4.d-inline-block
+  .p-0.d-inline-block.me-4
+    | Members
+  .d-inline-block.me-3
+    button.border-0.bg-white [data-bs-toggle="modal" data-bs-target="#studentsModal"]
+      i class="bi bi-plus-square"
+
+table.table.table-striped
+  thead
+    tr
+      th Name
+      th Surname
+      th Institution
+      th Action
+  tbody#all-students
+    =render collection: @group.students, partial: 'teacher/groups/student'
+
+
+.fs-4.mb-4.d-inline-block
+  .p-0.d-inline-block.me-4
+    | Visible subjects
+  .d-inline-block.me-3
+    button.border-0.bg-white [data-bs-toggle="modal" data-bs-target="#visibilityModal"]
+      i class="bi bi-plus-square"
+
+ul
+  -@group.visible_subjects.each do |subject|
+    li
+      .fs-4.mb-4.d-inline-block
+        .p-0.d-inline-block.me-4
+          =link_to subject.title, teacher_subject_path(subject), class: 'link-primary'
+        .d-inline-block.me-3
+          =link_to teacher_visibility_path(visibility_for(@group, subject)), class: 'icon-delete', data: { method: :delete, confirm: 'Are you sure?' } do
+            i class="bi bi-trash"
+
+#studentsModal.modal.fade[tabindex="-1" aria-labelledby="studentsModalLabel" aria-hidden="true"]
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        h5#studentsModalLabel.modal-title
+          | Add student to the group
+        button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+      .modal-body
+        input.form-control.mb-4#search-text type="text" placeholder="Name, surname or email"
+        table.table.table-hover#info-table
+          thead
+            tr
+              th Name
+              th Surname
+              th Email
+              th Institution
+              th
+          tbody#add-student-table
+            =render collection: Student.without_group, partial: 'teacher/groups/add_student', as: :student
+
+      .modal-footer
+        button.btn.btn-primary[type="button" data-bs-dismiss="modal"]
+          | Done
+
+#visibilityModal.modal.fade[tabindex="-1" aria-labelledby="visibilityModalLabel" aria-hidden="true"]
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        h5#addVisibility.modal-title
+          | Add visibility to this group
+        button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+      .modal-body
+        =form_with model: [:teacher, @visibility], local: true do |f|
+          .hidden
+            =f.number_field :group_id, value: @group.id, class: 'disabled'
+
+          .row.mb-2
+            .col-sm-2.col-form-label.fs-5
+              =f.label :subject_id, 'Subject'
+            .col-sm-10.col-form-label
+              =f.select :subject_id, (Subject.all - @group.visible_subjects).pluck(:title, :id), {}, class: 'form-select'
+
+          .modal-footer
+            =f.submit 'Done', class: 'btn btn-outline-success'
+
+

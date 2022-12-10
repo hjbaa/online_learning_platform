@@ -1,0 +1,46 @@
+.fs-2.mb-4.d-inline-block
+  .d-inline-block.me-2
+    =link_to :back, class: 'icon-back', data_toggle: "tooltip", title: "Back" do
+      i class="bi bi-arrow-left"
+  .p-0.d-inline-block.me-4
+    =@subject.title
+  -if current_user.author_of?(@subject)
+    .d-inline-block.me-3
+      =link_to edit_teacher_subject_path(@subject), class: 'icon-edit', data_toggle: "tooltip", title: "Edit" do
+        i class="bi bi-pencil-square"
+    .d-inline-block
+      = link_to teacher_subject_path(@subject), class: 'icon-delete', data: { method: :delete, confirm: 'Are you sure?' },
+              data_toggle: "tooltip", title: "Delete" do
+        i class="bi bi-trash"
+
+#accordionPanelsStayOpenExample.accordion
+  .accordion-item
+    h2#panelsStayOpen-headingOne.accordion-header
+      button.accordion-button aria-controls="panelsStayOpen-collapseOne" aria-expanded="true" data-bs-target="#panelsStayOpen-collapseOne" data-bs-toggle="collapse" type="button"
+        .fs-4
+          strong Description
+    #panelsStayOpen-collapseOne.accordion-collapse.collapse.show aria-labelledby="panelsStayOpen-headingOne"
+      .accordion-body.fs-4
+        =sanitize @subject.description.to_s
+
+  .accordion-item
+    h2#panelsStayOpen-headingTwo.accordion-header
+      button.accordion-button.collapsed aria-controls="panelsStayOpen-collapseTwo" aria-expanded="false" data-bs-target="#panelsStayOpen-collapseTwo" data-bs-toggle="collapse" type="button"
+        .fs-4.d-inline-block
+          .p-0.d-inline-block.me-4
+            strong Educational materials
+          .d-inline-block.me-3
+            = link_to new_teacher_subject_article_path(@subject), class: 'icon-new', data_toggle: "tooltip", title: "New" do
+              i class="bi bi-plus-square"
+    #panelsStayOpen-collapseTwo.accordion-collapse.collapse aria-labelledby="panelsStayOpen-headingTwo"
+      .accordion-body.fs-4
+        =render @subject.articles
+
+  .accordion-item
+    h2#panelsStayOpen-headingThree.accordion-header
+      button.accordion-button.collapsed aria-controls="panelsStayOpen-collapseThree" aria-expanded="false" data-bs-target="#panelsStayOpen-collapseThree" data-bs-toggle="collapse" type="button"
+        .fs-4
+          strong Tests
+    #panelsStayOpen-collapseThree.accordion-collapse.collapse aria-labelledby="panelsStayOpen-headingThree"
+      .accordion-body.fs-4
+        p This is the third item's accordion body.

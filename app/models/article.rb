@@ -2,8 +2,9 @@
 
 class Article < ApplicationRecord
   belongs_to :author, class_name: 'Teacher'
+  belongs_to :subject
 
-  has_one :test, dependent: :destroy
+  has_one :test, as: :testable, dependent: :destroy
   has_rich_text :body
   has_many_attached :files
 

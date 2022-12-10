@@ -1,0 +1,9 @@
+document.getElementById('group-student-<%= @student.id %>')
+    .parentNode.removeChild(document.getElementById('group-student-<%= @student.id %>'));
+
+if (document.getElementById('add-student-<%= @student.id %>')) {
+    document.getElementById('add-student-<%= @student.id %>').href = '<%= teacher_add_to_group_path(student_id: @student.id) %>'
+    document.getElementById('add-student-<%= @student.id %>').lastChild.className = 'bi bi-plus'
+} else {
+    document.getElementById('add-student-table').innerHTML += '<%= j render 'teacher/groups/add_student', student: @student %>'
+}

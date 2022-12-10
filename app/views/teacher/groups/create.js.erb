@@ -1,0 +1,9 @@
+document.getElementById('new-group-errors').innerHTML = '<%= render 'shared/errors', object: @group %>'
+
+<% if @group.persisted? %>
+  document.getElementById('groups-list').innerHTML += '<%= j render @group %>';
+
+  document.getElementById('new-group-form').classList.add('hidden');
+  document.getElementById('new-group-form').lastChild.reset();
+<% end %>
+

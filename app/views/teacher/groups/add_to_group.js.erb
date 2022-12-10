@@ -1,0 +1,4 @@
+document.getElementById('add-student-<%= @student.id %>').href = '<%= teacher_kick_from_group_path(student_id: @student.id) %>';
+document.getElementById('add-student-<%= @student.id %>').lastChild.className = 'bi bi-check-lg text-success';
+
+document.getElementById('all-students').innerHTML += '<%= j render 'teacher/groups/student', student: @student %>';

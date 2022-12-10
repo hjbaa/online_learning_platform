@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 class Teacher::ArticlesController < Teacher::BaseController
-  before_action :find_article, only: %i[show edit update destroy start update_inline]
+  before_action :find_article, only: %i[show edit update destroy start]
+  before_action :find_subject, only: %i[new create]
 
   def index
     @articles = Article.all
   end
 
   def new
-    @article = current_user.created_articles.new
+    @article = @subject.articles.new
   end
 
   def create
-    @article = current_user.created_articles.new(article_params)
+    @article = @subject.articles.new(article_params.merge(author: current_user))
 
     if @article.save
       flash[:success] = 'Your Article successfully created.'
@@ -41,7 +42,7 @@ class Teacher::ArticlesController < Teacher::BaseController
       @test = @article.test
     else
       # TODO: переписать по-человечески
-      @test = Test.new(author: current_user, article: @article)
+      @test = Test.new(author: current_user, testable: @article)
       @questions = @test.questions.build
       @answers = @questions.answers.build
     end
@@ -57,5 +58,9 @@ class Teacher::ArticlesController < Teacher::BaseController
 
   def find_article
     @article = Article.with_attached_files.find(params[:id])
+  end
+
+  def find_subject
+    @subject = Subject.find(params[:subject_id])
   end
 end
