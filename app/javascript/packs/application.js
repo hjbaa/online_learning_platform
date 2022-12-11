@@ -8,6 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "./tests/test_creation"
+import "./tests/question_creation"
 import "./groups/new_group"
 import "./groups/find-student"
 

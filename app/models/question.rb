@@ -7,5 +7,5 @@ class Question < ApplicationRecord
 
   accepts_nested_attributes_for :answers
 
-  validates :title, presence: true
+  validates_presence_of :title, :type
 end

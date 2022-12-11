@@ -11,9 +11,13 @@ Rails.application.routes.draw do
 
     resources :subjects do
       resources :articles, shallow: true
+
+      get '/new-test', to: 'tests#new', as: 'tests_new'
     end
 
-    resources :tests, except: :index
+    resources :tests, except: %i[new index] do
+      resources :questions
+    end
     resources :groups
     resources :visibilities, only: %i[create destroy]
 

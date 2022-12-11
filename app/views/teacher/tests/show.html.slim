@@ -1,0 +1,18 @@
+.mb-3
+  h1 =@test.title
+
+.mb-3
+  =link_to 'Add question', '#', class: 'btn btn-outline-primary', id: 'add-question-link'
+
+#new-question-form.my-3.hidden
+  =render 'teacher/questions/form', test: @test, question: @question
+
+-if @test.questions.empty?
+  .fs-4.alert.alert-danger
+    | There are no questions for this test yet!
+-else
+  ul
+  -@test.questions.each do |question|
+    li =question.title
+
+
