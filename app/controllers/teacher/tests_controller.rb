@@ -35,7 +35,7 @@ class Teacher::TestsController < Teacher::BaseController
 
   def test_params
     params.require(:test).permit(:title, :author_id, :testable_type, :testable_id, :seconds_for_passage,
-                                 questions_attributes: [:title, { answers_attributes: %i[content correct description] }])
+                                 questions_attributes: [:title, :type, { answers_attributes: %i[content correct description] }])
   end
 
   def find_test

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
 
     resources :tests, except: %i[new index] do
-      resources :questions
+      resources :questions, shallow: true
     end
     resources :groups
     resources :visibilities, only: %i[create destroy]

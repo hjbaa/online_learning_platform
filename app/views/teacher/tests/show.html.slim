@@ -4,10 +4,12 @@
 .mb-3
   =link_to 'Add question', '#', class: 'btn btn-outline-primary', id: 'add-question-link'
 
+#errors-area
+  =render 'shared/errors', object: @question
 #new-question-form.my-3.hidden
   =render 'teacher/questions/form', test: @test, question: @question
 
-#questions-list
+#questions-table
   -if @test.questions.empty?
     .fs-4.alert.alert-danger
       | There are no questions for this test yet!

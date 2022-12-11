@@ -8,4 +8,6 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :answers
 
   validates_presence_of :title, :type
+
+  self.inheritance_column = :_type_disabled
 end

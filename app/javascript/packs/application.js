@@ -11,6 +11,7 @@ import "./tests/test_creation"
 import "./tests/question_creation"
 import "./groups/new_group"
 import "./groups/find-student"
+import "./questions/edit_inline"
 
 import 'bootstrap'
 import "@oddcamp/cocoon-vanilla-js";

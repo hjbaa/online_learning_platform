@@ -8,6 +8,8 @@
       span Question #
     .col-sm-9
       =f.text_field :title, class: 'form-control', placeholder: 'Enter question'
+    .hidden
+      =f.text_field :type, value: 'MultipleOptionQuestion'
 
   .add-answers
     hr

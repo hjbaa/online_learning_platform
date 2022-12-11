@@ -1,0 +1,8 @@
+=form_with model: [:teacher, question], url: teacher_question_path(question), class: 'form-inline hidden',
+        data: { question_id: question.id }, method: :patch, local: false do |f|
+  .row.px-2
+    .col-sm-10
+      = f.text_field :title, class: 'form-control', placeholder: "Title"
+    .col-sm-2
+      =f.submit 'Submit', class: 'btn btn-success'
+
