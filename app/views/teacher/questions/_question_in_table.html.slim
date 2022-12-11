@@ -1,0 +1,13 @@
+tr
+  td.counter
+  td
+    = question.title
+  td
+    = type(question)
+  td
+    = question.answers.count
+  td
+    /TODO
+    =link_to 'Edit'
+    =link_to 'Destroy'
+    =link_to 'Add answer'

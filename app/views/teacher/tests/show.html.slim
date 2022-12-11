@@ -7,12 +7,21 @@
 #new-question-form.my-3.hidden
   =render 'teacher/questions/form', test: @test, question: @question
 
--if @test.questions.empty?
-  .fs-4.alert.alert-danger
-    | There are no questions for this test yet!
--else
-  ul
-  -@test.questions.each do |question|
-    li =question.title
+#questions-list
+  -if @test.questions.empty?
+    .fs-4.alert.alert-danger
+      | There are no questions for this test yet!
+
+  table.table.table-hover.table-bordered
+    thead
+      tr
+        th #
+        th Title
+        th Type
+        th Quantity of answers
+        th Actions
+    tbody#questions
+      =render collection: @test.questions, partial: 'teacher/questions/question_in_table', as: 'question'
+
 
 
