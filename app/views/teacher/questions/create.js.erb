@@ -41,5 +41,7 @@ function hide_form(event) {
 
 function hide_no_question_msg() {
     let msg = document.querySelector('.alert-danger');
-    msg.parentNode.removeChild(msg)
+    if (msg) {
+        msg.parentNode.removeChild(msg)
+    }
 }

@@ -1,3 +1,0 @@
-class NoOptionQuestion < Question
-
-end

@@ -1,17 +1,17 @@
 module Teacher::QuestionsHelper
   def allowed_types
     [
-      ['Multiple option question', 'MultipleOptionQuestion'],
-      ['Single option question', 'SingleOptionQuestion'],
-      ['No option question', 'NoOptionQuestion']
+      ['Multiple choice question', 'MultipleChoice'],
+      ['Single choice question', 'SingleChoice'],
+      ['No choice question', 'NoChoice']
     ]
   end
 
   def type(question)
     case question.type
-    when 'MultipleOptionQuestion'
+    when 'MultipleChoice'
       'Question with multiple choice'
-    when 'SingleOptionQuestion'
+    when 'SingleChoice'
       'Question with single choice'
     else
       'Question without choice'

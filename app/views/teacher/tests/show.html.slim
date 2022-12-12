@@ -9,7 +9,7 @@
 #new-question-form.my-3.hidden
   =render 'teacher/questions/form', test: @test, question: @question
 
-#questions-table
+#questions-table.enum-table
   -if @test.questions.empty?
     .fs-4.alert.alert-danger
       | There are no questions for this test yet!

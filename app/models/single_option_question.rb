@@ -1,3 +1,0 @@
-class SingleOptionQuestion < Question
-
-end

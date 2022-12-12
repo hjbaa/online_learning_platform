@@ -16,8 +16,13 @@ Rails.application.routes.draw do
     end
 
     resources :tests, except: %i[new index] do
-      resources :questions, shallow: true
+      resources :questions, shallow: true do
+        resources :answers, only: :create
+      end
     end
+
+    delete 'questions/:id/destroy_answers', to: 'questions#destroy_answers', as: 'question_destroy_answers'
+
     resources :groups
     resources :visibilities, only: %i[create destroy]
 

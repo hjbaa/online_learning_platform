@@ -13,23 +13,26 @@
   = type(@question)
 
 .fs-4
-  | Answers:
-  ul
-    =render @question.answers
+  .mb-4.d-inline-block
+    .p-0.d-inline-block.me-2
+      | Answers to this question:
+    -unless @question.answers.empty?
+      .d-inline-block
+        = link_to teacher_question_destroy_answers_path(@question), class: 'icon-delete', data: { method: :delete, confirm: 'Are you sure?' },
+                data_toggle: "tooltip", title: "Delete" do
+          i class="bi bi-trash"
+  ol#answers-list
+    =render collection: @question.answers, partial: 'teacher/answers/answer_in_question', as: 'answer'
 
-button.btn.btn-outline-primary [data-bs-toggle="modal" data-bs-target="#answersModal"]
-  | Add answers
+-if @question.answers.empty?
+  button.btn.btn-outline-primary [data-bs-toggle="modal" data-bs-target="#answersModal"]
+    | Add answers
 
-#answersModal.modal.fade[tabindex="-1" aria-labelledby="studentsModalLabel" aria-hidden="true"]
-  .modal-dialog.modal-lg
-    .modal-content
-      .modal-header
-        h5#answersModalLabel.modal-title
-          | Add answer to this question
-        button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
-      .modal-body
-        p nothing here yet
-
-      .modal-footer
-        button.btn.btn-primary[type="button" data-bs-dismiss="modal"]
-          | Done
+  #answersModal.modal.fade[tabindex="-1" aria-labelledby="studentsModalLabel" aria-hidden="true"]
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          h5#answersModalLabel.modal-title
+            | Add answer to this question
+          button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+        =answer_form(@question)

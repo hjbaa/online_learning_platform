@@ -1,0 +1,10 @@
+= form_with model: [:teacher, question, Answer.new] do |f|
+  .modal-body
+    = f.hidden_field :correct, value: 'true'
+
+    .form-floating.mb-3
+      = f.text_field :content, class: 'form-control', id: 'floating-input', placeholder: "Title"
+      = f.label :content, 'Content', for: 'floating-input'
+
+  .modal-footer
+    = f.submit 'Submit', class: 'btn btn-primary'
