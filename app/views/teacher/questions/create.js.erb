@@ -1,6 +1,8 @@
 document.getElementById('errors-area').innerHTML = '<%= j render 'shared/errors', object: @question %>'
 
 <% if @question.persisted? %>
+  hide_no_question_msg();
+
   document.getElementById('questions').innerHTML += '<%= j render 'teacher/questions/question_in_table', question: @question %>'
   document.getElementById('errors-area').innerHTML = ''
   document.getElementById('new-question-form').firstElementChild.reset();
@@ -35,4 +37,9 @@ function hide_form(event) {
 
     document.getElementById('add-question-link').removeEventListener('click', hide_form)
     document.getElementById('add-question-link').addEventListener('click', show_form)
+}
+
+function hide_no_question_msg() {
+    let msg = document.querySelector('.alert-danger');
+    msg.parentNode.removeChild(msg)
 }

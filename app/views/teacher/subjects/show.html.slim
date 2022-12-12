@@ -47,4 +47,5 @@
               i class="bi bi-plus-square"
     #panelsStayOpen-collapseThree.accordion-collapse.collapse aria-labelledby="panelsStayOpen-headingThree"
       .accordion-body.fs-4
-        p This is the third item's accordion body.
+        ul
+          =render collection: @subject.tests, partial: 'teacher/tests/test_without_questions', as: 'test'

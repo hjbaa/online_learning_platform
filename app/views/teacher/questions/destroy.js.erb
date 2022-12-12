@@ -1,1 +1,10 @@
 document.getElementById('question-' + '<%= @question.id %>').parentNode.removeChild(document.getElementById('question-' + '<%= @question.id %>'))
+
+if (document.querySelector('#questions').childElementCount === 0) {
+    let div = document.createElement('div');
+    div.className = 'fs-4 alert alert-danger';
+    div.innerText = 'There are no questions for this test yet!';
+
+    let tableArea = document.querySelector('#questions-table');
+    tableArea.insertBefore(div, tableArea.lastChild);
+}
