@@ -11,9 +11,6 @@ class Teacher::QuestionsController < Teacher::BaseController
   end
 
   def update
-    puts "\n\n\n"
-    puts params
-    puts "\n\n\n"
     @question.update(question_params)
   end
 

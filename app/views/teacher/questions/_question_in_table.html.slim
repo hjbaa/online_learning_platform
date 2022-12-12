@@ -8,7 +8,6 @@ tr id="question-#{question.id}"
   td
     = question.answers.count
   td
-    /TODO
     .d-inline-block
       .d-inline-block.me-3
         = link_to '#', class: 'icon-edit form-inline-link', data: { question_id: question.id }, data_toggle: "tooltip", title: "Edit" do
