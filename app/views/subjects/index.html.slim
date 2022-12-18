@@ -1,5 +1,6 @@
 .fs-1.mb-3
-  | Your subjects
+  = "Your subjects | "
+  =link_to 'Public articles', public_articles_path, class: 'link'
 
 .fs-4
   =render @subjects

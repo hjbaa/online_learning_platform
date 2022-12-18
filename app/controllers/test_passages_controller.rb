@@ -14,6 +14,8 @@ class TestPassagesController < ApplicationController
     @test_passage.accept!(params[:answers])
 
     if @test_passage.completed?
+      @test_passage.update(success: true) if @test_passage.success?
+
       redirect_to result_test_passage_path(@test_passage)
     else
       render :show

@@ -4,7 +4,7 @@ class Teacher::ArticlesController < Teacher::BaseController
   before_action :find_subject, only: %i[new create]
 
   def index
-    @articles = Article.all
+    @articles = Article.where(type: 'Public')
   end
 
   def new

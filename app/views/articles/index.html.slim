@@ -1,5 +1,6 @@
-.fs-2.p-0.mb-4
-  | All articles
+.fs-1.mb-3
+  =link_to 'Your subjects', subjects_path, class: 'link'
+  = " | Public articles"
 
 .card-columns
   =render @articles

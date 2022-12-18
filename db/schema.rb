@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 2022_12_12_063826) do
     t.bigint "user_id", null: false
     t.bigint "current_question_id"
     t.bigint "test_id", null: false
+    t.boolean "success", default: false
     t.float "score", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

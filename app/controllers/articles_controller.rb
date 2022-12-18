@@ -4,6 +4,10 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!
   before_action :find_article, only: :show
 
+  def index
+    @articles = Article.where(type: 'Public')
+  end
+
   def show; end
 
   private

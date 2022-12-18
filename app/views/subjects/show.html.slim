@@ -31,4 +31,5 @@
           strong Tests
     #panelsStayOpen-collapseThree.accordion-collapse.collapse aria-labelledby="panelsStayOpen-headingThree"
       .accordion-body.fs-4
-        p This is the third item's accordion body.
+        ul
+          =render @subject.tests

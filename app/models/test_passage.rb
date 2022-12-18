@@ -27,8 +27,6 @@ class TestPassage < ApplicationRecord
   end
 
   def success?
-    return false if expired?
-
     correct_percentage >= test.passing_score
   end
 
