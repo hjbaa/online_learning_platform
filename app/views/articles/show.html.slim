@@ -5,10 +5,10 @@
   .p-0.d-inline-block.me-4
     =@article.title
 
-.mb-4.fs-4
+.mb-1.fs-4
   =sanitize @article.body.to_s
 
-#test-passage
+#test-passage.mb-5
   -if @article.test.present?
     =form_tag test_passing_path(@article.test), method: :get, remote: true do
       =submit_tag 'Test', class: 'btn btn-success'

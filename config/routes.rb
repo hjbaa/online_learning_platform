@@ -31,4 +31,11 @@ Rails.application.routes.draw do
   end
 
   get '/tests/:id', to: 'tests#test_passing', as: 'test_passing'
+  post '/tests/:id/start', to: 'tests#start'
+
+  resources :test_passages, only: %i[show update] do
+    member do
+      get :result
+    end
+  end
 end

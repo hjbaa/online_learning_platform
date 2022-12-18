@@ -1,0 +1,25 @@
+script
+  |  localStorage.clear();
+- if @test_passage.success?
+  .alert.alert-success
+    strong You passed the test!
+
+- else
+  .alert.alert-danger
+    strong You didn't passed the test!
+p
+  | You scored
+  strong
+    = @test_passage.score
+    |  of
+    = @test_passage.test.questions.count
+  |  correct answers!
+
+.progress
+  |  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width:
+  =@test_passage.correct_percentage
+  | %" aria-valuenow="
+  =@test_passage.correct_percentage
+  | " aria-valuemin="0" aria-valuemax="100">
+  = @test_passage.correct_percentage
+  | %

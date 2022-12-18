@@ -14,4 +14,10 @@
     .col-lg-9.col-form-label
       =f.number_field :seconds_for_passage, min: 60, max: 3600, value: 600, class: 'form-control form-control-lg'
 
+  .row.mb-4
+    .col-lg-3.col-form-label.fs-4
+      = f.label :passing_score, 'Passing score in percentage'
+    .col-lg-9.col-form-label
+      = f.number_field :passing_score, min: 0, max: 100, value: 60, class: 'form-control form-control-lg'
+
   =f.submit 'Create test', class: 'btn btn-success btn-lg mb-4'
