@@ -15,15 +15,15 @@
 .mb-xl-4.fs-4
   =sanitize @article.body.to_s
 
+-if current_user == @article.author
+  .created-test.mb-5
+    -if @test.new_record?
+      =link_to 'Create test for article', '#', id: 'create-test-button', class: 'btn btn-outline-secondary btn-md'
+      #new-test-errors
+        = render 'shared/errors', object: @test
 
-.created-test.mb-5
-  -if @test.new_record?
-    =link_to 'Create test for article', '#', id: 'create-test-button', class: 'btn btn-outline-secondary btn-md'
-    #new-test-errors
-      = render 'shared/errors', object: @test
+      #test-form.hidden
+        =render 'teacher/tests/form_inline', test: @test
 
-    #test-form.hidden
-      =render 'teacher/tests/form_inline', test: @test
-
-  -else
-    =render @test
+    -else
+      =render @test
