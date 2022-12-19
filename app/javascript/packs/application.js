@@ -14,6 +14,7 @@ import "./groups/find-student"
 import "./questions/edit_inline"
 import "./answers/new_answer_row"
 import "./test_passing/timer"
+import "./utilities/back_button"
 
 import 'bootstrap'
 import "@oddcamp/cocoon-vanilla-js";
