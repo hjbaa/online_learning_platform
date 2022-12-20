@@ -9,8 +9,6 @@ class TestPassage < ApplicationRecord
 
   def accept!(answers)
     self.score += calculate_question_result(answers)
-    puts "\n\n\n\nACCEPTING"
-    puts "SCORE: #{score}"
     save!
   end
 
@@ -64,11 +62,11 @@ class TestPassage < ApplicationRecord
     when 'SingleChoice'
       return 1 if correct_answers.first.id == answers.to_i
 
-      return 0
+      0
     else
       return 1 if correct_answers.first.content == answers
 
-      return 0
+      0
     end
   end
 end

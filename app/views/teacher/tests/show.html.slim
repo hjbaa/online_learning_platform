@@ -1,5 +1,9 @@
-.mb-3
-  h1 =@test.title
+.fs-2.mb-4.d-inline-block
+  .d-inline-block.me-2
+    =link_to :back, class: 'icon-back', data_toggle: "tooltip", title: "Back" do
+      i class="bi bi-arrow-left"
+  .p-0.d-inline-block.me-2
+    =@test.title
 
 .mb-3
   =link_to 'Add question', '#', class: 'btn btn-outline-primary', id: 'add-question-link'
