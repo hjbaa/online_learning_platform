@@ -16,6 +16,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: URI::MailTo::EMAIL_REGEXP
   validates :name, presence: true
   validates :last_name, presence: true
+  validates :type, inclusion: { in: %w[Teacher Student Admin] }
 
   def test_passage(test)
     test_passages.order(id: :desc).find_by(test_id: test.id)

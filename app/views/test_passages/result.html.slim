@@ -10,10 +10,7 @@ script
 p
   | You scored
   strong
-    = @test_passage.score
-    |  of
-    = @test_passage.test.questions.count
-  |  correct answers!
+    = " #{@test_passage.score} of #{@test_passage.test.questions_with_answers.count} correct answers!"
 
 .progress
   |  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width:

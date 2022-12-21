@@ -17,11 +17,11 @@ class TestPassage < ApplicationRecord
   end
 
   def correct_percentage
-    (score.to_f / test.questions.count * 100).round
+    (score.to_f / test.questions_with_answers.count * 100).round
   end
 
   def current_question_number
-    test.questions.order(:id).where('id < ?', current_question.id).size + 1
+    test.questions_with_answers.order(:id).where('id < ?', current_question.id).size + 1
   end
 
   def success?
@@ -39,14 +39,18 @@ class TestPassage < ApplicationRecord
   end
 
   def next_question
-    return test.questions.first if current_question.nil?
+    return test.questions_with_answers.first if current_question.nil?
     return nil if expired?
 
-    test.questions.order(:id).where('id > ?', current_question.id).first
+    test.questions_with_answers.order(:id).where('id > ?', current_question.id).first
   end
 
   def set_current_question
     self.current_question = next_question
+    #
+    # while (current_question && current_question&.answers.size.zero?)
+    #   self.current_question = next_question
+    # end
   end
 
   def correct_answers
