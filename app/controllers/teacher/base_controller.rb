@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Teacher::BaseController < ApplicationController
   layout 'teacher'
   before_action :authenticate_user!

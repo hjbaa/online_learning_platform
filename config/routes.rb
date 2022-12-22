@@ -6,14 +6,26 @@ Rails.application.routes.draw do
     resources :articles, only: %i[show], shallow: true
   end
 
+  get '/public_articles', to: 'articles#index', as: 'public_articles'
+
   namespace :teacher do
     get '/', to: 'teachers#show', as: ''
+    get '/public_articles', to: 'articles#index', as: 'public_articles'
 
     resources :subjects do
-      resources :articles, shallow: true
+      resources :articles, shallow: true, except: :index
+
+      get '/new-test', to: 'tests#new', as: 'tests_new'
     end
 
-    resources :tests, only: %i[create destroy]
+    resources :tests, except: %i[new index] do
+      resources :questions, shallow: true do
+        resources :answers, only: :create
+      end
+    end
+
+    delete 'questions/:id/destroy_answers', to: 'questions#destroy_answers', as: 'question_destroy_answers'
+
     resources :groups
     resources :visibilities, only: %i[create destroy]
 
@@ -22,4 +34,11 @@ Rails.application.routes.draw do
   end
 
   get '/tests/:id', to: 'tests#test_passing', as: 'test_passing'
+  post '/tests/:id/start', to: 'tests#start', as: 'start_test'
+
+  resources :test_passages, only: %i[show update] do
+    member do
+      get :result
+    end
+  end
 end

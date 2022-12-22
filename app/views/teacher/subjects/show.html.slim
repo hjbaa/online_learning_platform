@@ -33,14 +33,19 @@
             = link_to new_teacher_subject_article_path(@subject), class: 'icon-new', data_toggle: "tooltip", title: "New" do
               i class="bi bi-plus-square"
     #panelsStayOpen-collapseTwo.accordion-collapse.collapse aria-labelledby="panelsStayOpen-headingTwo"
-      .accordion-body.fs-4
+      .accordion-body.fs-4.p-lg-5
         =render @subject.articles
 
   .accordion-item
     h2#panelsStayOpen-headingThree.accordion-header
       button.accordion-button.collapsed aria-controls="panelsStayOpen-collapseThree" aria-expanded="false" data-bs-target="#panelsStayOpen-collapseThree" data-bs-toggle="collapse" type="button"
-        .fs-4
-          strong Tests
+        .fs-4.d-inline-block
+          .p-0.d-inline-block.me-4
+            strong Tests
+          .d-inline-block.me-3
+            = link_to teacher_subject_tests_new_path(@subject), class: 'icon-new', data_toggle: "tooltip", title: "New" do
+              i class="bi bi-plus-square"
     #panelsStayOpen-collapseThree.accordion-collapse.collapse aria-labelledby="panelsStayOpen-headingThree"
       .accordion-body.fs-4
-        p This is the third item's accordion body.
+        ul
+          =render collection: @subject.tests, partial: 'teacher/tests/test_without_questions', as: 'test'

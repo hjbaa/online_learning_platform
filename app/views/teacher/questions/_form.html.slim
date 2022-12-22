@@ -1,0 +1,12 @@
+=render 'shared/errors', object: question
+
+=form_with model: [:teacher, test, question], local: false do |f|
+  .form-floating.mb-3
+    =f.text_field :title, class: 'form-control', id: 'floating-input', placeholder: "Title"
+    =f.label :title, 'Title', for: 'floating-input'
+
+  .mb-3.row
+    =f.label :type, 'Select type of the question: ', class: 'col-form-label col-2'
+    .col-10
+      =f.select :type, allowed_types, {},  class: 'form-select'
+  =f.submit 'Submit', class: 'btn btn-outline-success'

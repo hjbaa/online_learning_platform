@@ -3,7 +3,7 @@ class Group < ApplicationRecord
   has_and_belongs_to_many :teachers, join_table: 'groups_users', association_foreign_key: 'user_id'
 
   has_many :students, dependent: :nullify
-  has_many :visibilities
+  has_many :visibilities, dependent: :destroy
   has_many :visible_subjects, through: :visibilities, source: :subject
 
   validates_presence_of :name

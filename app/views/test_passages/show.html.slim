@@ -1,0 +1,20 @@
+h1
+  = "Passing the #{@test_passage.test.title} test"
+- if @test_passage.time_is_set?
+  #timer.py-4
+    h2
+      | Time left:
+    table.table.table-bordered.text-center
+      thead
+        tr
+          th
+            | Hours
+          th
+            | Minutes
+          th
+            | Seconds
+      tbody
+        = time_parser
+
+#question
+  =question_partial(@test_passage.current_question)

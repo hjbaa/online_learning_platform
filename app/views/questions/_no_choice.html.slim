@@ -1,0 +1,8 @@
+h3.mb-3
+  = question.title
+
+=form_with url: test_passage_path(@test_passage), local: true, method: :put do |f|
+  .form-floating.mb-3
+    = f.text_field :answers, class: 'form-control', id: 'floating-input', placeholder: "Your answer"
+    = f.label :answers, 'Your answer', for: 'floating-input'
+  =f.submit 'Next question', class: 'btn btn-success'

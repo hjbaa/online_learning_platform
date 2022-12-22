@@ -3,7 +3,7 @@
     ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
       li =link_to 'Online Learning', root_path, class: 'nav-link px-2 text-white'
       -if current_user.is_a?(Teacher)
-        li =link_to "Teacher's stuff", teacher_path, class: 'nav-link px-2 text-white'
+        li =link_to "Teacher Resources", teacher_path, class: 'nav-link px-2 text-white'
 
     ul class="nav col-12 col-lg-auto mb-2 mb-md-0"
       - if user_signed_in?

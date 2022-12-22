@@ -1,7 +1,7 @@
 class Teacher::SubjectsController < Teacher::BaseController
   before_action :find_subject, only: %i[show edit update destroy]
   def index
-    @subjects = Subject.all
+    @subjects = current_user.created_subjects
   end
 
   def create

@@ -4,7 +4,7 @@ class Teacher::ArticlesController < Teacher::BaseController
   before_action :find_subject, only: %i[new create]
 
   def index
-    @articles = Article.all
+    @articles = Article.where(type: 'Public')
   end
 
   def new
@@ -34,14 +34,13 @@ class Teacher::ArticlesController < Teacher::BaseController
   def destroy
     @article.destroy
     flash[:success] = 'Article was destroyed!'
-    redirect_to teacher_articles_path
+    redirect_to teacher_subject_path(@article.subject)
   end
 
   def show
     if @article.test.present?
       @test = @article.test
     else
-      # TODO: переписать по-человечески
       @test = Test.new(author: current_user, testable: @article)
       @questions = @test.questions.build
       @answers = @questions.answers.build
