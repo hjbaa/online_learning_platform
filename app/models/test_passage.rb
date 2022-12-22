@@ -47,10 +47,6 @@ class TestPassage < ApplicationRecord
 
   def set_current_question
     self.current_question = next_question
-    #
-    # while (current_question && current_question&.answers.size.zero?)
-    #   self.current_question = next_question
-    # end
   end
 
   def correct_answers

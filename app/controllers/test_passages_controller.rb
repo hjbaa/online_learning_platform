@@ -8,9 +8,6 @@ class TestPassagesController < ApplicationController
   def result; end
 
   def update
-    puts "\n\n\n"
-    puts params
-
     @test_passage.accept!(params[:answers])
 
     if @test_passage.completed?

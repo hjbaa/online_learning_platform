@@ -1,5 +1,9 @@
 script
   |  localStorage.clear();
+
+.link.mb-3
+  =link_to 'Back to subject', subject_path(@test_passage.test.testable)
+
 - if @test_passage.success?
   .alert.alert-success
     strong You passed the test!
