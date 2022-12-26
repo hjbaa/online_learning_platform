@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2022_12_12_063826) do
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "author_id"
+    t.bigint "author_id", null: false
     t.string "type", default: "Public", null: false
     t.string "description"
     t.bigint "subject_id"
@@ -111,35 +111,28 @@ ActiveRecord::Schema.define(version: 2022_12_12_063826) do
   end
 
   create_table "test_passages", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "student_id", null: false
     t.bigint "current_question_id"
     t.bigint "test_id", null: false
-    t.boolean "success", default: false
     t.float "score", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["current_question_id"], name: "index_test_passages_on_current_question_id"
+    t.index ["student_id"], name: "index_test_passages_on_student_id"
     t.index ["test_id"], name: "index_test_passages_on_test_id"
-    t.index ["user_id"], name: "index_test_passages_on_user_id"
   end
 
   create_table "tests", force: :cascade do |t|
-    t.string "title", default: ""
-    t.integer "seconds_for_passage"
+    t.string "title", default: "", null: false
     t.bigint "author_id", null: false
-    t.string "testable_type"
-    t.bigint "testable_id"
-    t.integer "passing_score", default: 60
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_tests_on_author_id"
-    t.index ["testable_type", "testable_id"], name: "index_tests_on_testable"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
-    t.string "institution", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -175,6 +168,7 @@ ActiveRecord::Schema.define(version: 2022_12_12_063826) do
   add_foreign_key "subjects", "users", column: "author_id"
   add_foreign_key "test_passages", "questions", column: "current_question_id"
   add_foreign_key "test_passages", "tests"
+  add_foreign_key "test_passages", "users", column: "student_id"
   add_foreign_key "tests", "users", column: "author_id"
   add_foreign_key "users", "groups"
   add_foreign_key "visibilities", "groups"
