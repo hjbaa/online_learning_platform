@@ -1,0 +1,18 @@
+=render 'shared/errors', object: test
+
+=form_with model: [:teacher, test], local: false do |f|
+  = f.hidden_field :author_id
+  = f.hidden_field :testable_id
+  = f.hidden_field :testable_type
+
+  =f.text_field :title, placeholder: 'Title', class: 'form-control form-control-lg w-100'
+
+  .add-questions
+    =f.fields_for :questions do |q|
+      =render 'teacher/questions/question_fields', f: q
+
+    .add-question-link.mb-5.fs-3
+      =link_to_add_association f, :questions, partial: 'teacher/questions/question_fields', class: 'icon-new', data_toggle: "tooltip", title: "New Question" do
+        i class="bi bi-plus-square"
+
+  =f.submit 'Create test', class: 'btn btn-success btn-lg mb-4'

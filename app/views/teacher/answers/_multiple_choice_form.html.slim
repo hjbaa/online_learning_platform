@@ -1,0 +1,35 @@
+= form_with url: teacher_question_answers_path(question) do |f|
+  .modal-body
+    table.table.enum-table
+      thead
+        tr
+          td Answer #
+          td Correct
+          td Content
+      tbody.new-answers-fields
+        tr
+          td.align-middle.counter
+          td.align-middle =check_box_tag 'answer[][correct]', 'true', true, class: 'form-check-input'
+          td
+            .form-floating
+              = text_field_tag 'answer[][content]', nil, class: 'form-control', id: 'floating-input'
+              = f.label :content, 'Content', for: 'floating-input'
+        tr
+          td.align-middle.counter
+          td.align-middle =check_box_tag 'answer[][correct]', 'true', false, class: 'form-check-input'
+          td
+            .form-floating
+              = text_field_tag 'answer[][content]', nil, class: 'form-control', id: 'floating-input'
+              = f.label :content, 'Content', for: 'floating-input'
+
+        tr.hidden.new-answer-row
+          td.align-middle.counter
+          td.align-middle =check_box_tag 'answer[][correct]', 'true', false, class: 'form-check-input'
+          td
+            .form-floating
+              = text_field_tag 'answer[][content]', nil, class: 'form-control', id: 'floating-input'
+              = f.label :content, 'Content', for: 'floating-input'
+
+  .modal-footer
+    =link_to 'Add new answer', '#', class: 'btn btn-outline-primary', id: 'add-new-answer-form'
+    = f.submit 'Submit', class: 'btn btn-success'

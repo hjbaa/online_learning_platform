@@ -7,9 +7,15 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+
 import "./tests/test_creation"
+import "./tests/question_creation"
 import "./groups/new_group"
 import "./groups/find-student"
+import "./questions/edit_inline"
+import "./answers/new_answer_row"
+import "./test_passing/timer"
+import "./utilities/back_button"
 
 import 'bootstrap'
 import "@oddcamp/cocoon-vanilla-js";

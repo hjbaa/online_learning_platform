@@ -1,0 +1,33 @@
+.fs-2.mb-4.d-inline-block
+  .d-inline-block.me-2
+    =link_to :back, class: 'icon-back', data_toggle: "tooltip", title: "Back" do
+      i class="bi bi-arrow-left"
+  .p-0.d-inline-block.me-2
+    =@test.title
+
+.mb-3
+  =link_to 'Add question', '#', class: 'btn btn-outline-primary', id: 'add-question-link'
+
+#errors-area
+  =render 'shared/errors', object: @question
+#new-question-form.my-3.hidden
+  =render 'teacher/questions/form', test: @test, question: @question
+
+#questions-table.enum-table
+  -if @test.questions.empty?
+    .fs-4.alert.alert-danger
+      | There are no questions for this test yet!
+
+  table.table.table-hover.table-bordered
+    thead
+      tr
+        th #
+        th Title
+        th Type
+        th Quantity of answers
+        th Actions
+    tbody#questions
+      =render collection: @test.questions, partial: 'teacher/questions/question_in_table', as: 'question'
+
+
+
