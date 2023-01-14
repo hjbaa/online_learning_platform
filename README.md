@@ -1,24 +1,10 @@
-# README
+# Курсовая работа по дисциплине "Технология разработки программных систем".
+## МГТУ им. Н.Э. Баумана, кафедра ИУ-6, 5-й семестр.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<hr>
 
-Things you may want to cover:
+Тема: Web-приложение для предоставления образовательных услуг
 
-* Ruby version
+Оценка: Отлично (100/100)
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[Рассчётно-пояснительная записка](https://drive.google.com/file/d/1Bgp5QtSkCThMl5NUBKYt6ZfMQKu2Vcl2/view?usp=share_link)
