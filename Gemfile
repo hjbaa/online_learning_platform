@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.3'
+ruby '3.2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.5', '>= 6.1.5.1'
@@ -32,7 +32,6 @@ gem 'bootstrap', '~> 5.2.1'
 gem 'cocoon'
 gem 'devise'
 
-gem 'popper_js', '~> 2.11.5'
 gem 'slim-rails', '~> 3.3'
 gem 'sprockets-rails', '>= 2.3.2'
 
