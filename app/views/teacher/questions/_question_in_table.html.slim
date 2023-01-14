@@ -1,0 +1,18 @@
+tr id="question-#{question.id}"
+  td.counter
+  td
+    = link_to question.title, teacher_question_path(question), class: 'link question-title', data: { question_id: question.id }
+    = render 'teacher/questions/form_inline', question: question
+  td
+    = type(question)
+  td
+    = question.answers.count
+  td
+    .d-inline-block
+      .d-inline-block.me-3
+        = link_to '#', class: 'icon-edit form-inline-link', data: { question_id: question.id }, data_toggle: "tooltip", title: "Edit" do
+          i class="bi bi-pencil-square"
+      .d-inline-block
+        = link_to teacher_question_path(question), class: 'icon-delete', data: { remote: true, method: :delete, confirm: 'Are you sure?' },
+                data_toggle: "tooltip", title: "Delete" do
+          i class="bi bi-trash"

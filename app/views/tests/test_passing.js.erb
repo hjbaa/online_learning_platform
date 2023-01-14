@@ -169,7 +169,6 @@ quizObj.createQuiz = function () {
 quizObj.endQuiz = function () {
     quizObj.clearTestArea();
 
-    // TODO: добавить коллекцию для результатов
     let resultPercent = quizObj.score / quizObj.questions.length * 100;
     let resultArea = document.createElement('div');
     resultArea.className = 'fs-3 py-2';
@@ -177,7 +176,14 @@ quizObj.endQuiz = function () {
     let resultLine = document.createElement('p');
     resultLine.innerText = 'Your result: ' + resultPercent + '%';
 
+    let resultDescription = document.createElement('p');
+
+    if (resultPercent >= 90) resultDescription.innerText = 'You got it right!';
+    else if (resultPercent >= 75) resultDescription.innerText = 'Good, but some things need to be revisited';
+    else resultDescription.innerText = 'You need to read article again!';
+
     resultArea.appendChild(resultLine);
+    resultArea.appendChild(resultDescription);
 
     document.getElementById('test-passage').appendChild(resultArea);
 }
